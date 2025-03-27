@@ -1,0 +1,202 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body{
+    background-color: #fff;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    font-weight: 500;
+    text-decoration: none;
+    color: #04195e;
+}
+
+/*HEADER*/
+header{
+    padding: 0 2rem;
+    width: 100%;
+    height: 100px;
+    max-width: 1600px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+header img{
+    width: 100px;
+    height: 100px;
+}
+/*Contenido*/
+
+i.fa-solid.fa-circle-arrow-left{
+    color: #04195e;
+    border: none;
+    font-size: 2rem;
+}
+
+.btn_volver{
+    padding: 0 2rem;
+    width: 100%;
+    height: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.2rem;
+}
+
+.enlace_home{
+    display: inline-flex;
+    align-items: center;
+}
+
+.volver{
+    font-weight: 500;
+    margin-left: .5rem;
+}
+
+.formulario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    margin-bottom: 2rem;
+}
+
+h1{
+    text-align: center;
+    padding: 20px;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+ul{
+    width: 500px;
+    text-align: start;
+}
+
+li{
+    margin: .5rem;
+}
+
+label, input{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+input{
+    width: 100%;
+    padding: .7rem 1rem;
+    border: 2px solid #04195e;
+    background-color: #fcfcfc;
+    border-radius: 10px;
+}
+
+select{
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: .7rem 1rem;
+    background-color: #fcfcfc;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+}
+
+.select_uni{
+    display: flex;
+    justify-content: center;
+}
+
+.documento{
+    display: flex;
+    justify-content: center;
+}
+
+.documento label{
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.upload_button{
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #1d3557;
+    cursor: pointer;
+    color: #1d3557;
+}
+
+.upload_button label{
+    margin: 0;
+    padding: 0;
+    padding-top: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.upload_input{
+    display: none;
+}
+
+.condiciones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input#acuerdo_politicas{
+    margin-right: 10px;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 35px;
+    height: 25px;
+    appearance: none;
+    border: 2px solid #04195e;
+}
+
+input#acuerdo_politicas:checked{
+    background-color: #04195e;
+}
+
+button{
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border: none;
+    padding: .7rem 1rem;
+    background-color: #04195e;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.boton{
+    display: flex;
+    justify-content: center;
+}

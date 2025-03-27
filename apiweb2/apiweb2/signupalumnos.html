@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Alumnos</title>
+    <link rel="stylesheet" href="signupalumnos_styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="/imagenes/LogoV2.svg" alt="logo"></div>
+    </header>
+
+    <main>
+        <div class="btn_volver">
+            <a class="enlace_home" href="signup.html">
+                <div class="icon_flecha">
+                    <i class="fa-solid fa-circle-arrow-left"></i>
+                </div>
+            <div class="volver">Volver</div></a>
+        </div>
+    <div class="formulario">
+        <form action="#" class="registro">
+            <h1>Crear una Cuenta</h1>
+        <ul>
+            <label for="nombre">Nombre Completo</label>
+            <li><input type="text" id="nombre" required></li><br>
+            <label for="correo">Correo Electrónico</label>
+            <li><input type="email" id="correo" required></li><br>
+            <label for="contraseña">Contraseña</label>
+            <li><input type="password" id="contraseña" required></li><br>
+            <label for="confirmar_contraseña">Confirmar Contraseña</label>
+            <li><input type="password" id="confirmar_contraseña" required></li><br>
+            
+            <div class="condiciones">
+                <input type="checkbox" id="acuerdo_politicas" required>
+                <label>Al crear la cuenta, estás aceptando los términos de servicio y la política de privacidad.</label>
+            </div><br>
+            <li class="boton">
+                <a href="configperfil_estudiante.html">
+                    <button type="submit">Subir Solicitud</button></a> 
+            </li>      
+        </ul>
+    </form>
+    </div>
+    </main>
+    <script>
+    document.querySelector('.registro').addEventListener('submit', async (event) => {
+        event.preventDefault(); // Evita la recarga de la página
+
+        // Captura los datos del formulario
+        const nombre = document.getElementById('nombre').value;
+        const correo = document.getElementById('correo').value;
+        const contraseña = document.getElementById('contraseña').value;
+        const universidad = document.getElementById('universidades').value;
+
+        // Crear objeto FormData para enviar los datos como formulario
+        const formData = new FormData();
+        formData.append('nombre', nombre);
+        formData.append('correo', correo);
+        formData.append('contraseña', contraseña);
+        formData.append('universidad', universidad);
+
+        // Enviar los datos al archivo PHP
+        try {
+            const response = await fetch('guardar_alumno.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.text();
+            if (response.ok && result.includes("Registro exitoso")) {
+                alert(result); // Muestra el mensaje devuelto por PHP
+                window.location.href = 'configperfil_estudiante.html'; // Redirige a la siguiente página
+            } else {
+                alert('Error en el registro: ' + result);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al conectar con el servidor');
+        }
+    });
+</script>
+
+</body>
+</html>
+

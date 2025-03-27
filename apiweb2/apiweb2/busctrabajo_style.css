@@ -1,0 +1,133 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body{
+    background-color: #fff;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+}
+
+button{
+    padding: .5rem;
+    border-radius: 10px;
+    border: 1px solid #04195e;
+    color: #fff;
+    background-color: #04195e;
+    width: 100%;
+    max-width: 250px;
+    cursor: pointer;
+}
+
+/*HEADER*/
+header{
+    position: relative;
+    padding: 0 2rem;
+    box-shadow: 0 3px 3px #00000012;
+}
+
+header img{
+    width: 80px;
+    height: 80px;
+}
+
+.navbar{
+    width: 100%;
+    height: 100px;
+    max-width: 1600px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+}
+
+header li{
+    display: flex;
+    align-items: center;
+}
+
+.navbar .links{
+    display: flex;
+    gap: 2rem;
+}
+
+header i{
+    color: #fdba00;
+    font-size: 2rem;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+    margin: 20px 0; 
+}
+
+/* Barra de búsqueda */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 8px 12px;
+    width: 250px;
+}
+
+.search-bar i {
+    color: #888; 
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.search-bar button {
+    border: none;
+    padding: 10px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.category-selector {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 8px 12px;
+    width: 250px;
+}
+
+.category-selector select {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background-color: transparent;
+    color: #333;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+  

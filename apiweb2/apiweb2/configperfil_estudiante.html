@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link rel="stylesheet" href="configperfil_estudiante_styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Configuración del perfil</h1>
+        </header>
+        
+        <section class="profile-setup">
+            <div class="profile-pic">
+                <img src="default-avatar.png" alt="Foto de perfil" id="profile-image">
+                <button>Elige una foto</button>
+            </div>
+
+            <div class="form-group">
+                <label for="career">Carrera</label>
+                <input type="text" id="career" placeholder="Ejemplo: Lic. Administración" >
+            </div>
+
+            <div class="form-group">
+                <label for="semester">Semestre</label>
+                <input type="number" id="semester" placeholder="6" value="6">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Categoría</label>
+                <select id="category">
+                    <option value="idiomas">Idiomas</option>
+                    <option value="sitemas">sistemas</option>
+                    <option value="Desarrollo Web">desarrollo web</option>
+                    <option value="administracion">administracion</option>
+                    <option value="construccion">construccion</option>
+                    <!-- Otras opciones aquí -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="skills">Habilidades</label>
+                <input type="text" id="skills" placeholder="Añadir habilidades">
+                <button class="add-skill-btn">+</button>
+            </div>
+
+            <div class="form-group">
+                <label>Tus certificaciones</label>
+                <div class="upload-box">
+                    <span>Sube tus certificaciones</span>
+                    <input type="file">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Proyectos en los que has trabajado</label>
+                <div class="upload-box">
+                    <span>Sube las imágenes de tu proyecto</span>
+                    <input type="file">
+                </div>
+            </div>
+
+            <button class="submit-btn">Finalizar registro</button>
+        </section>
+    </div>
+</body>
+</html>

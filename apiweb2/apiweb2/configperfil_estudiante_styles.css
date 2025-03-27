@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif; /* Mantengo la fuente Inter */
+}
+
+body {
+    background-color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa; /* Cambio a color consistente con tu estilo */
+    border-radius: 10px; /* Bordes redondeados como en tu diseño */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Sombra similar */
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 2rem; /* Tamaño de fuente consistente */
+}
+
+.profile-setup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.profile-pic {
+    grid-column: 1 / 3;
+    text-align: center;
+}
+
+.profile-pic img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-pic button {
+    padding: 8px 16px;
+    background-color: #04195e; /* Azul oscuro como en tus botones */
+    color: white;
+    border: none;
+    border-radius: 10px; /* Bordes redondeados */
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.profile-pic button:hover {
+    background-color: #002f88; /* Consistente con el hover que tienes */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.form-group input, .form-group select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #04195e; /* Azul oscuro en los bordes */
+    background-color: #fcfcfc;
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.form-group input[type="number"] {
+    width: 100px;
+}
+
+.skills-list {
+    margin-top: 10px;
+}
+
+.skills-list span {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #e0e0e0;
+    border-radius: 12px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.add-skill-btn {
+    padding: 8px 12px;
+    background-color: #04195e; /* Botones azul oscuro */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.add-skill-btn:hover {
+    background-color: #002f88;
+}
+
+.upload-box {
+    padding: 20px;
+    border: 2px dashed #04195e; /* Azul oscuro en los bordes */
+    background-color: #f8f9fa;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.upload-box input[type="file"] {
+    display: none;
+}
+
+.submit-btn {
+    grid-column: 1 / 3;
+    padding: 12px;
+    background-color: #04195e; /* Azul oscuro para el botón */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #002f88; /* Hover consistente */
+}

@@ -1,0 +1,193 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body{
+    background-color: #fff;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+}
+
+button{
+    padding: .5rem;
+    border-radius: 10px;
+    border: 1px solid #04195e;
+    color: #fff;
+    background-color: #04195e;
+    width: 100%;
+    max-width: 250px;
+    cursor: pointer;
+}
+
+/*HEADER*/
+header{
+    position: relative;
+    padding: 0 2rem;
+    box-shadow: 0 3px 3px #00000012;
+}
+
+header img{
+    width: 80px;
+    height: 80px;
+}
+
+.navbar{
+    width: 100%;
+    height: 100px;
+    max-width: 1600px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+}
+
+header li{
+    display: flex;
+    align-items: center;
+}
+
+.navbar .links{
+    display: flex;
+    gap: 2rem;
+}
+
+header i{
+    color: #fdba00;
+    font-size: 2rem;
+}
+
+/*CONTENIDO*/
+main{
+    padding: 1rem;
+    margin: auto;
+    max-width: 1300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+main a{
+    width: 200px;
+}
+
+main i{
+    color: #f10ac7;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+/*TARJETA*/
+.card{
+    padding: 1rem;
+    font-weight: 500;
+    border: 2px solid #dddddd;
+    background-color: #fcfcfc;
+    border-radius: 10px;
+    height: 300px;
+}
+
+.card ul{
+    width: 100%;
+}
+
+.card li{
+    padding: .5rem;
+}
+
+.card .rating i{
+    color: #fdba00;
+    font-size: 1rem;
+    margin-right: 0;
+}
+
+.card .variables{
+    margin-top: 1rem;
+    font-weight: 400;
+    font-size: .8rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card .btn{
+    display: flex;
+    justify-content: center;
+}
+
+/*AJUSTES*/
+.container{
+    padding-inline: 1rem;
+    width: 60%;
+}
+
+.container ul{
+    width: 100%;
+}
+
+.container li{
+    padding: .5rem;
+}
+
+.container h4{
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.container p{
+    padding: .8rem;
+    border: 1px solid #04195e;
+    border-radius: 15px;
+    background-color: #fafafa;
+    width: 80%;
+}
+
+.container span{
+    padding: .5rem;
+    padding-inline: 1rem;
+    border: 2px dashed #04195e;
+    border-radius: 15px;
+    background-color: #fafafa;
+    font-weight: 600;
+    font-style: italic;
+    color: #04195e;
+}
+
+.container input{
+    width: 80%;
+    padding: .5rem;
+    border: 1px solid #04195e;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+/*PORTAFOLIO*/
+.section{
+    margin-top: 1.5rem;
+}
+.certifications, .projects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.cert-box, .proj-box {
+    width: 100%;
+    height: 100px;
+    background-color: #0af;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+
+

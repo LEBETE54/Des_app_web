@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="perfil_alumnos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><img src="imagenes/LogoV2.svg" alt="logo"></div>
+            <ul class="links">
+                <li><a href="busctrabajo.html">Buscar Trabajo</a></li>
+                <li><a href="misproyectos.html">Mis Proyectos</a></li>
+                <li><a href="perfil_alumnos.html">
+                    <i class="fa-regular fa-circle-user"></i>
+                </a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="card">
+            <ul>
+                <li>
+                    <i class="fa-solid fa-user-graduate"></i><span>Jane Doe</span>
+                </li>
+                <li class="rating">
+                    <span><i class="fa-solid fa-star"></i></span>
+                    <span><i class="fa-solid fa-star"></i></span>
+                    <span><i class="fa-solid fa-star"></i></span>
+                    <span><i class="fa-solid fa-star"></i></span>
+                    <span><i class="fa-solid fa-star-half-stroke"></i></span>
+                </li>
+                <li>
+                    <span>Traducción e Interpretación de Idiomas</span>
+                </li>
+                <li>
+                    <span>Semestre 6</span>
+                </li>
+                <li class="variables">
+                    <span>Saldo actual<br><b>MX$0.00</b></span>
+                    <span>Proyectos en curso<br><b>0</b></span>
+                </li>
+                <li class="btn">
+                    <a href="#">
+                        <button type="button">Retirar</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <ul>
+                <li>
+                    <h4>Correo</h4>
+                    <p>jane.doe@school.com</p>
+                </li>
+                <li>
+                    <form action="#">
+                        <ul>
+                            <h4>Contraseña</h4>
+                            <li>
+                                <input id="contraseña" type="password" placeholder="contraseña">
+                            </li>
+                            <li>
+                                <input type="password" placeholder="confirmar contraseña">
+                            </li>
+                            <li class="btn">
+                                <a href="#">
+                                    <button type="button">Cambiar contraseña</button>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
+                </li>
+                <li>
+                    <h4>Categoría</h4>
+                    <p>Idiomas</p>
+                </li>
+                <li>
+                    <h4>Habilidades</h4>
+                </li>
+                <li>
+                    <span>chino</span>
+                    <span>ingles</span>
+                    <span>japones</span>
+                </li>
+                <div class="section">
+                    <h4>Mis Certificaciones</h4>
+                    <div class="certifications">
+                        <div class="cert-box"></div>
+                        <div class="cert-box"></div>
+                        <div class="cert-box"></div>
+                        <div class="cert-box"></div>
+                    </div>
+                    <button class="upload-btn">Subir nueva certificación</button>
+                </div>
+                
+                <div class="section">
+                    <h4>Proyectos en los que he trabajado</h4>
+                    <div class="projects">
+                        <div class="proj-box"></div>
+                        <div class="proj-box"></div>
+                        <div class="proj-box"></div>
+                        <div class="proj-box"></div>
+                    </div>
+                    <button class="upload-btn">Subir nueva imagen</button>
+                </div>
+                
+            </ul>
+        </div>
+    </main>
+</body>
+</html>

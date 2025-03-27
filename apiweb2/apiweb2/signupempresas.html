@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro empresas</title>
+    <link rel="stylesheet" href="signupempresas_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="/imagenes/LogoV2.svg" alt="logo"></div>
+    </header>
+
+    <main>
+        
+    <div class="btn_volver">
+        <a class="enlace_home" href="signup.html">
+            <div class="icon_flecha">
+                <i class="fa-solid fa-circle-arrow-left"></i>
+            </div>
+        <div class="volver">Volver</div></a>
+    </div>
+
+        <div class="formulario">
+            <form action="#" class="registro">
+                <h1>Registro de Empresa</h1>
+                <ul>
+                    
+                    <label for="nombre_empresa">Nombre de la Empresa</label>
+                    <li><input type="text" id="nombre_empresa" required></li><br>
+                    <label for="nombre_representante">Nombre del Representante</label>
+                    <li><input type="text" id="nombre_representante" required></li><br>
+    
+                    
+                    <label for="correo">Correo Electrónico</label>
+                    <li><input type="email" id="correo" required></li><br>
+    
+                    
+                    <label for="telefono">Teléfono de Contacto</label>
+                    <li><input type="tel" id="telefono" required></li><br>
+    
+                    
+                    <label for="direccion">Dirección de la Empresa</label>
+                    <li><input type="text" id="direccion" required></li><br>
+    
+                    
+                    <label for="contraseña">Contraseña</label>
+                    <li><input type="password" id="contraseña" required></li><br>
+    
+                    
+                    <label for="confirmar_contraseña">Confirmar Contraseña</label>
+                    <li><input type="password" id="confirmar_contraseña" required></li><br>
+    
+                    
+                    <div class="documento">
+                        <label for="subir_documento">Subir Documento de Registro Empresarial (PDF, JPG, PNG)</label>
+                        <div class="upload_button">
+                            <label for="subir_documento">+</label>
+                        </div>
+                        <input type="file" id="subir_documento" class="upload_input" accept=".pdf, .jpg, .png" required>
+                    </div><br>
+    
+                    
+                    <div class="condiciones">
+                        <input type="checkbox" id="acuerdo_politicas" required>
+                        <label for="acuerdo_politicas">Al crear la cuenta, estás aceptando los términos de servicio y la política de privacidad.</label>
+                    </div><br>
+    
+                    
+                    <li class="boton">
+                        <a href="configperfil_empresas.html" >
+                            <button type="submit"> Subir Solicitud </button>
+                        </a>
+                </ul>
+            </form>
+        </div>
+    </main>
+    <script>
+    document.querySelector('.registro').addEventListener('submit', async (event) => {
+        event.preventDefault(); // Evita la recarga de la página
+
+        // Captura los datos del formulario
+        const nombre_empresa = document.getElementById('nombre_empresa').value;
+        const nombre_representante = document.getElementById('nombre_representante').value;
+        const correo = document.getElementById('correo').value;
+        const telefono = document.getElementById('telefono').value;
+        const direccion = document.getElementById('direccion').value;
+        const contraseña = document.getElementById('contraseña').value;
+
+        // Crear objeto FormData para enviar los datos como formulario
+        const formData = new FormData();
+        formData.append('nombre_empresa', nombre_empresa);
+        formData.append('nombre_representante', nombre_representante);
+        formData.append('correo', correo);
+        formData.append('telefono', telefono);
+        formData.append('direccion', direccion);
+        formData.append('contraseña', contraseña);
+
+        // Enviar los datos al archivo PHP
+        try {
+            const response = await fetch('guardar_empresa.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.text();
+            if (response.ok && result.includes("Registro exitoso")) {
+                alert(result); // Muestra el mensaje devuelto por PHP
+                window.location.href = 'configperfil_empresas.html'; // Redirige a la siguiente página
+            } else {
+                alert('Error en el registro: ' + result);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al conectar con el servidor');
+        }
+    });
+    </script>
+</body>
+</html>
+
