@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de perfil</title>
+    <link rel="stylesheet" href="configperfil_estudiante_styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2 class="section-title">Configuración del perfil</h2>
+        <div class="profile-settings">
+            <div class="profile-photo">
+                <img src="imagenes/usuario.png" alt="Foto de perfil" id="profile-image">
+                <button class="upload-photo-btn">Elige una foto</button>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="career">Carrera</label>
+                    <input type="text" id="career" value="Traducción e Interpretación de Idiomas">
+                </div>
+
+                <div class="form-group">
+                    <label for="semester">Semestre</label>
+                    <input type="number" id="semester" value="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Categoría</label>
+                    <select id="category">
+                        <option value="idiomas" selected>Idiomas</option>
+                        <option value="sistemas">Sistemas</option>
+                        <option value="desarrollo web">Desarrollo Web</option>
+                        <option value="administracion">Administración</option>
+                        <option value="construccion">Construcción</option>
+                    </select>
+                </div>
+
+                <div class="form-group skills-group">
+                    <label for="skills">Habilidades</label>
+                    <div class="skills-input">
+                        <input type="text" id="skills" placeholder="Ej. chino, japonés">
+                        <button class="add-skill-btn">+</button>
+                    </div>
+                    <div class="skills-tags">
+                        <span class="tag">chino tradicional</span>
+                        <span class="tag">checo</span>
+                        <span class="tag">chino simplificado</span>
+                        <span class="tag">japonés</span>
+                        <span class="tag">inglés</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uploads-section">
+                <div class="upload-box">
+                    <label>Tus certificaciones</label>
+                    <div class="upload-area">
+                        <span>Sube tus certificaciones</span>
+                        <input type="file">
+                    </div>
+                </div>
+                <div class="upload-box">
+                    <label>Proyectos en los que has trabajado</label>
+                    <div class="upload-area">
+                        <span>Sube las imágenes de tu proyecto</span>
+                        <input type="file">
+                    </div>
+                </div>
+            </div>
+
+            <button class="submit-btn">Finalizar registro</button>
+        </div>
+    </div>
+</body>
+</html>

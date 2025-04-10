@@ -1,0 +1,187 @@
+<html>
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentarios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="comentarios_style.css">
+
+ </head>
+ <body class="bg-gray-100">
+  <div class="max-w-4xl mx-auto p-4 bg-white shadow-md mt-6">
+   <div class="flex justify-between items-center mb-4">
+    <div class="text-sm text-gray-500">
+     <span class="font-bold">
+      Student
+     </span>
+     | Comentarios
+    </div>
+    <div class="flex space-x-4 text-sm text-gray-500">
+     <a class="hover:underline" href="buscasesoria.html">
+      Buscar Asesorias
+     </a>
+     <a class="hover:underline" href="misproyectos.html">
+      Mis Asesorias
+     </a>
+     <i class="fas fa-user">
+     </i>
+    </div>
+   </div>
+   <h1 class="text-2xl font-bold mb-2">
+    Comentarios Sobre Introduccion a C++
+   </h1>
+   <p class="text-gray-700 mb-4">
+    El proyecto consiste en aprender lo mas basico de este lenguaje de programacion desde cero, desde lo mas facil hasta llegar en un punto mas avanzado sobre el lenguaje y ponerlo a prueba en tus proyectos personales gracias a esta asesoria.
+   </p>
+   <h2 class="text-xl font-bold mb-4">
+    Comentarios
+   </h2>
+   <div class="space-y-4">
+    <div class="flex items-start space-x-4">
+     <img alt="Profile picture of Mateo Israel Lizama" class="w-12 h-12 rounded-full" height="50" src="imagenes/usuario.png" width="50"/>
+     <div class="flex-1">
+      <div class="flex justify-between items-center">
+       <h3 class="font-bold">
+        Mateo Israel Lizama
+       </h3>
+       <span class="text-sm text-gray-500">
+        12/08/2024
+       </span>
+      </div>
+      <p class="text-gray-700">
+       Este trabajo implica reparar el tejado de una casa residencial...
+      </p>
+      <div class="flex items-center">
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-gray-300">
+        <i class="fas fa-star">
+        </i>
+       </span>
+      </div>
+     </div>
+    </div>
+    <div class="flex items-start space-x-4">
+     <img alt="Profile picture of Camila Torres" class="w-12 h-12 rounded-full" height="50" src="imagenes/usuario.png" width="50"/>
+     <div class="flex-1">
+      <div class="flex justify-between items-center">
+       <h3 class="font-bold">
+        Camila Torres
+       </h3>
+       <span class="text-sm text-gray-500">
+        10/08/2024
+       </span>
+      </div>
+      <p class="text-gray-700">
+       Gracias a esta asesoria logré entender punteros, que era lo que más me costaba en C++.
+      </p>
+      <div class="flex items-center">
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-gray-300">
+        <i class="fas fa-star">
+        </i>
+       </span>
+      </div>
+     </div>
+    </div>
+    <div class="flex items-start space-x-4">
+     <img alt="Profile picture of Diego Fernandez" class="w-12 h-12 rounded-full" height="50" src="imagenes/usuario.png" width="50"/>
+     <div class="flex-1">
+      <div class="flex justify-between items-center">
+       <h3 class="font-bold">
+        Diego Fernandez
+       </h3>
+       <span class="text-sm text-gray-500">
+        10/08/2024
+       </span>
+      </div>
+      <p class="text-gray-700">
+       Buena asesoria, aunque me hubiera gustado más ejemplos prácticos.
+      </p>
+      <div class="flex items-center">
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-yellow-500">
+        <i class="fas fa-star">
+        </i>
+       </span>
+       <span class="text-gray-300">
+        <i class="fas fa-star">
+        </i>
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <h2 class="text-xl font-bold mt-6 mb-4">
+    Deja tu comentario
+   </h2>
+   <div class="space-y-4">
+    <div>
+     <label class="block text-gray-700" for="calificacion">
+      Calificación
+     </label>
+     <select class="w-full border border-gray-300 rounded-md p-2" id="calificacion">
+      <option>
+       Calificación
+      </option>
+     </select>
+    </div>
+    <div>
+     <label class="block text-gray-700" for="comentario">
+      Comentario
+     </label>
+     <textarea class="w-full border border-gray-300 rounded-md p-2" id="comentario" placeholder="Escribe tu comentario..."></textarea>
+    </div>
+    <div class="flex space-x-4">
+     <button class="bg-green-500 text-white px-4 py-2 rounded-md">
+      Enviar Comentario
+     </button>
+     <button class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">
+      Regresar
+     </button>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>

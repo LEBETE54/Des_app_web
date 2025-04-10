@@ -1,0 +1,203 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body{
+    background-color: #fff;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+}
+
+button{
+    padding: .5rem;
+    border-radius: 10px;
+    border: 1px solid #04195e;
+    color: #fff;
+    background-color: #04195e;
+    width: 100%;
+    max-width: 250px;
+    cursor: pointer;
+}
+
+/*HEADER*/
+header{
+    position: relative;
+    padding: 0 2rem;
+    box-shadow: 0 3px 3px #00000012;
+}
+
+header img{
+    width: 80px;
+    height: 80px;
+}
+
+.navbar{
+    width: 100%;
+    height: 100px;
+    max-width: 1600px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+}
+
+header li{
+    display: flex;
+    align-items: center;
+}
+
+.navbar .links{
+    display: flex;
+    gap: 2rem;
+}
+
+header i{
+    color: #fdba00;
+    font-size: 2rem;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+    margin: 20px 0; 
+}
+
+/* Barra de búsqueda */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 8px 12px;
+    width: 250px;
+}
+
+.search-bar i {
+    color: #888; 
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.search-bar button {
+    border: none;
+    padding: 10px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.category-selector {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 8px 12px;
+    width: 250px;
+}
+
+.category-selector select {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background-color: transparent;
+    color: #333;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+/* CARDS DE ASESORÍAS */
+
+.asesorias-container {
+    padding: 0 2rem;
+    margin-top: 2rem;
+}
+
+.asesorias-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #04195e;
+}
+
+.cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #04195e;
+}
+
+.card .label {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+}
+
+.card .horario {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.card .descripcion {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.8rem;
+    flex-grow: 1;
+}
+
+.card .rating {
+    font-size: 1rem;
+    color: #f5b800;
+}
+
+
+  
