@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+  }
+
+  header {
+    background-color: #fff;
+    padding: 15px 30px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header h1 {
+    font-size: 20px;
+    color: #444;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+
+  .titulo {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #222;
+  }
+
+  .recurso {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    gap: 20px;
+  }
+
+  .recurso img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .info-recurso {
+    flex: 1;
+  }
+
+  .info-recurso h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .info-recurso p {
+    margin: 5px 0;
+    color: #666;
+  }
+
+  .info-recurso .tipo {
+    font-size: 13px;
+    color: #999;
+  }
+
+  .boton-recurso {
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .boton-recurso:hover {
+    background-color: #2980b9;
+  }
+
+  .fecha {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 5px;
+  }
+
+  @media (max-width: 600px) {
+    .recurso {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .boton-recurso {
+      margin-top: 10px;
+    }
+  }

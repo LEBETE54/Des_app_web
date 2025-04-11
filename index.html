@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentConnect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><img src="imagenes/LogoV2.svg" alt="logo"></div>
+            <ul class="links">
+                <li><a href="#">Estudiantes</a></li>
+                <a class="action_btn Registrarse" href="signupalumnos.html">Registrarse</a>
+                <a class="action_btn Login" href="#">Iniciar Sesión</a> 
+            </ul>
+            <div class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>   
+        </div>
+
+        <div class="dropdown_menu">
+            <li><a href="#">Estudiante</a></li>
+            <li><a href="#">Empresa</a></li>
+            <li><a class="action_btn Registrarse" href="signupalumnos.html">Registrarse</a></li>
+            <li><a class="action_btn Login" href="#">Iniciar Sesión</a></li>
+        </div>
+    </header>
+
+    <main>
+        <div class="main1">
+            <div class="desc">
+                <h1>¡Que tu mejor amigo sea tu asesor!</h1>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem adipisci quod earum voluptates saepe praesentium ratione in veniam asperiores inventore reprehenderit architecto necessitatibus explicabo quis animi ipsam, doloremque non unde!</p>
+                <a class="action_btn Registrarse" href="signupalumnos.html">Comenzar Ahora</a>
+            </div>
+            <div class="img">
+                <img class="main_img" src="imagenes/main_img.png" alt="personas">
+            </div>
+        </div>
+
+        <div class="main2"></div>
+    </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleBtn = document.querySelector('.toggle_btn');
+        const toggleBtnIcon = document.querySelector('.toggle_btn i');
+        const dropDownMenu = document.querySelector('.dropdown_menu');
+    
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open');
+        }
+    });
+    
+    </script>
+</body>
+</html>

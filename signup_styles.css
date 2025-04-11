@@ -1,0 +1,146 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body{
+    background-color: #fff;
+}
+
+li{
+    list-style: none;
+}
+
+div{
+    background-color: #fff;
+}
+
+a{
+    text-decoration: none;
+    font-weight: 600;
+    color: #04195e;
+}
+
+/*HEADER*/
+header{
+    padding: 0 2rem;
+    width: 100%;
+    height: 100px;
+    max-width: 1600px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+header img{
+    width: 100px;
+    height: 100px;
+}
+
+/*MAIN*/
+i.fa-solid.fa-circle-arrow-left{
+    color: #04195e;
+    border: none;
+}
+
+/*Boton Volver*/
+.btn_volver{
+    padding: 0 2rem;
+    width: 100%;
+    height: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.2rem;
+    font-size: 1.2rem;
+}
+
+.enlace_home{
+    display: inline-flex;
+    align-items: center;
+    display: inline-flex;
+    align-items: center;
+}
+
+/*Opciones de Registro*/
+/*Opciones de Registro*/
+.opciones_registro{
+    margin-top: 2rem;
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    height: 300px;
+}
+
+h2{
+    font-size: 2rem;
+    color: #000;
+    justify-content: center;
+}
+
+/*Formato Tarjetas de Registro*/
+/*Formato Tarjetas de Registro*/
+.signup_box{
+    border-radius: 20px;
+    margin: 20px;
+    width: 460px;
+    padding: .5rem;
+}
+
+/*Botones Registro*/
+/*Botones Registro*/
+.enlace_signup_estudiante,
+.enlace_signup_empresa{
+    margin-top: 3rem;
+    border: 2px solid #04195eaa;
+    border: 2px solid #04195eaa;
+    border-radius: 10px;
+    background-color: #fafafa;
+    padding: 1rem;
+    width: 100%;
+    height: 180px;
+    text-align: start;
+}
+
+.icon{
+    background-color: transparent;
+}
+
+i{
+    border: 2px dashed #04195e;
+    border-radius: 40%;
+    padding: 10px;
+    color: #f30d93;
+    font-size: 2rem;
+}
+
+.texto{
+    color: #333;
+    margin-top: 1.5rem;
+}
+
+/*Boton Login*/
+.footer{  
+    padding: 0 2rem;
+    width: 100%;
+    height: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.enlace_login{
+    margin-left: 1.5rem;
+    cursor: pointer;
+}
+/**/

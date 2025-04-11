@@ -1,0 +1,139 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9fafb;
+    margin: 0;
+    padding: 2rem;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .titulo {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .mis-asesorias {
+    font-size: 0.9rem;
+    color: #1f2937;
+    text-decoration: none;
+  }
+  
+  .formulario {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  
+  .categorias, .habilidades {
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+  }
+  
+  .lista-categorias label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    gap: 0.5rem;
+  }
+  
+  .lista-categorias input[type="radio"] {
+    appearance: none;
+    border: 2px solid #1f2937;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .lista-categorias input[type="radio"]:checked::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #1f2937;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+  }
+  
+  .agregar-habilidad {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .agregar-habilidad input {
+    flex: 1;
+    padding: 0.4rem 0.7rem;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+  }
+  
+  .agregar-habilidad button {
+    background-color: #1f2937;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .tags span {
+    background-color: white;
+    border: 2px solid #1f2937;
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    color: #1f2937;
+  }
+  
+  #descripcion {
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+    border-radius: 10px;
+    border: 2px solid #d1d5db;
+    font-size: 0.95rem;
+  }
+  
+  .boton-finalizar {
+    grid-column: 2;
+    text-align: right;
+    margin-top: 1rem;
+  }
+  
+  .boton-finalizar button {
+    background-color: #1f2937;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="misproyectos_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo"><img src="imagenes/LogoV2.svg" alt="logo"></div>
+            <ul class="links">
+                <li><a href="buscasesoria.html">Buscar Asesoria</a></li>
+                <li><a href="perfil_alumnos.html">
+                    <i class="fa-regular fa-circle-user"></i>
+                </a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="section-tabs">
+            <button class="tab selected" id="activos">Asesorias Activas</button>
+            <button class="tab" id="esperando">Asesorias En Espera</button>
+            <button class="tab" id="completados">Asesorias Completados</button>
+        </div>
+        <div class="projects-content">
+
+        </div>
+    </main>
+    <script>
+        // Seleccionamos todos los botones de los tabs
+        const tabs = document.querySelectorAll('.tab');
+
+        // Agregamos el evento click a cada tab
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Removemos la clase 'selected' de todos los tabs
+                tabs.forEach(t => t.classList.remove('selected'));
+                
+                // Agregamos la clase 'selected' al tab clickeado
+                this.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>
