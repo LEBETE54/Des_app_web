@@ -13,8 +13,8 @@ export default function Navbar() {
         </div>
         <ul className="links">
           <li><a href="#">Estudiantes</a></li>
-          <a className="action_btn Registrarse" href="/signupalumnos">Registrarse</a>
-          <a className="action_btn Login" href="#">Iniciar Sesión</a>
+          <a className="action_btn Registrarse" href="/signup">Registrarse</a>
+          <a className="action_btn Login" href="/login">Iniciar Sesión</a>
         </ul>
         <div className="toggle_btn" onClick={() => setMenuOpen(!menuOpen)}>
           <i className="fa-solid fa-bars"></i>
