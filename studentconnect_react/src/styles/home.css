@@ -46,9 +46,7 @@ header img{
 .navbar{
     width: 100%;
     height: 100px;
-    max-width: 1600px;
     margin: 0 auto;
-    margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -146,7 +144,6 @@ li{
     padding: 0 2rem;
     width: 100%;
     height: 60px;
-    max-width: 1000px;
     margin: 0 auto;
     margin-top: 30px;
     display: flex;
