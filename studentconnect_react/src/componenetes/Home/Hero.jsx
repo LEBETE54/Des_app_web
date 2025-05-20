@@ -10,7 +10,7 @@ export default function Hero() {
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem adipisci
           quod earum voluptates...
         </p>
-        <a className="action_btn Registrarse" href="/signupalumnos">Comenzar Ahora</a>
+        <a className="action_btn Registrarse" href="/signup">Comenzar Ahora</a>
       </div>
       <div className="img">
         <img className="main_img" src={mainImg} alt="personas" />
