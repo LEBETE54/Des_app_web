@@ -1,5 +1,5 @@
-import mainImg from "../assets/imagenes/image.png";
-import "../styles/hero.css";
+import mainImg from "../../assets/imagenes/image.png";
+import "../../styles/Home/hero.css";
 
 export default function Hero() {
   return (

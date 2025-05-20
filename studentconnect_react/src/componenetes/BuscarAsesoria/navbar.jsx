@@ -1,5 +1,5 @@
-import "../buscasesoria_style.css";
-import Logo from "../assets/imagenes/LogoV2.svg";
+import "../../styles/BuscarAsesoria/navbar.css";
+import Logo from "../../assets/LogoV2.svg";
 
 export default function Navbar() {
   return (

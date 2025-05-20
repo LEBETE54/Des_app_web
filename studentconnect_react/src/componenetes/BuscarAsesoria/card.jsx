@@ -1,3 +1,5 @@
+import "../../styles/BuscarAsesoria/cardgrid.css"
+
 export default function Card({ titulo, horario, descripcion, rating }) {
   return (
     <div className="card">

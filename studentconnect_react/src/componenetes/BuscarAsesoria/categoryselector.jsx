@@ -1,3 +1,5 @@
+import "../../styles/BuscarAsesoria/categoryselector.css"
+
 export default function CategorySelector() {
   return (
     <div className="category-selector">

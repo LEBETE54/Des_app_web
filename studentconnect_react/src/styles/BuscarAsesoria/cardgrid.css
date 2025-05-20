@@ -1,0 +1,69 @@
+.asesorias-container {
+    padding: 0 2rem;
+    margin-top: 2rem;
+}
+
+.asesorias-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #04195e;
+}
+
+.cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #04195e;
+}
+
+.card .label {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+}
+
+.card .horario {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.card .descripcion {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.8rem;
+    flex-grow: 1;
+    line-height: 1.4;
+}
+
+.card .rating {
+    font-size: 1rem;
+    color: #f5b800;
+}

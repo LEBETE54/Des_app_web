@@ -1,6 +1,6 @@
-import logo from "../assets/LogoV2.svg";
+import logo from "../../assets/LogoV2.svg";
 import { useState } from "react";
-import "../styles/NavBarHome.css";
+import "../../styles/Home/NavBarHome.css";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);

@@ -1,0 +1,65 @@
+.recurso {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+  gap: 20px;
+}
+
+.recurso img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.info-recurso {
+  flex: 1;
+}
+
+.info-recurso h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.info-recurso p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.info-recurso .tipo {
+  font-size: 13px;
+  color: #999;
+}
+
+.fecha {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 5px;
+}
+
+.boton-recurso {
+  text-decoration: none;
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.boton-recurso:hover {
+  background-color: #2980b9;
+}
+
+@media (max-width: 600px) {
+  .recurso {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .boton-recurso {
+    margin-top: 10px;
+  }
+}

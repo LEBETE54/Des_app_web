@@ -1,5 +1,5 @@
-import "../styles/home.css";
-import "../styles/dropdown.css";
+import "../../styles/Home/home.css";
+import "../../styles/Home/dropdown.css";
 
 export default function DropdownMenu() {
   return (
