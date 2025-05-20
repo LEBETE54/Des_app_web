@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import BuscarAsesoria from "./pages/BuscarAsesoria";
 import Recursos from "./pages/Recursos";
+import RegistroAlumno from "./pages/signup";
+import Login from "./pages/login";
 // import Signup from "./pages/Signup"; // si ya la tienes
 // import Login from "./pages/Login"; // si ya la tienes
 
@@ -11,6 +13,8 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<RegistroAlumno />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/BuscarAsesoria" element={<BuscarAsesoria />} />
         <Route path="/Recursos" element={<Recursos />} />
         {/* <Route path="/signupalumnos" element={<Signup />} /> */}
