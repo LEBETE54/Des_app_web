@@ -5,7 +5,7 @@ import BuscarAsesoria from "./pages/BuscarAsesoria";
 import Recursos from "./pages/Recursos";
 import ConfigPerfilPage from "./pages/ConfigPerfilPage";
 import Comentarios from "./pages/Comentarios";
-import Signup from "./pages/Signup"; // si ya la tienes
+import Signup from "./pages/signup"; // si ya la tienes
 import Login from "./pages/login"; // si ya la tienes
 
 export default function App() {
