@@ -1,0 +1,42 @@
+label {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+select,
+textarea {
+  background-color: #f9fafb; /* gray-50 */
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button {
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.btn-enviar {
+  background-color: #10b981; /* emerald-500 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+}
+
+.btn-regresar {
+  background-color: #d1d5db; /* gray-300 */
+  color: #374151;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+}

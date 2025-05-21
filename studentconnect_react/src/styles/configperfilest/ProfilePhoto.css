@@ -1,0 +1,29 @@
+.profile-photo {
+  text-align: center;
+}
+
+.profile-photo img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #04195e;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.upload-photo-btn {
+  padding: 10px 20px;
+  background-color: #04195e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  max-width: 250px;
+}
+
+.upload-photo-btn:hover {
+  background-color: #002f88;
+}

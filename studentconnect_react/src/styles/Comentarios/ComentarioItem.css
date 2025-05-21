@@ -1,0 +1,54 @@
+.comentario {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-family: 'Inter', sans-serif;
+}
+
+.comentario:last-child {
+  border-bottom: none;
+}
+
+.comentario img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.contenido {
+  flex: 1;
+}
+
+.contenido h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: #111827;
+}
+
+.contenido p {
+  margin: 0.3rem 0 0;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.fecha {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.estrellas {
+  margin-top: 0.4rem;
+}
+
+.estrellas i {
+  color: #fbbf24;
+  margin-right: 0.2rem;
+  font-size: 1rem;
+}

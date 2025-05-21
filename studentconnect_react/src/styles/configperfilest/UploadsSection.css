@@ -1,0 +1,33 @@
+.uploads-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.upload-box {
+  background: #fdfdfd;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid #04195e;
+}
+
+.upload-box label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #04195e;
+}
+
+.upload-area {
+  border: 2px dashed #04195e;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  color: #666;
+  background-color: #fafafa;
+}
+
+.upload-box input[type="file"] {
+  display: none;
+}
