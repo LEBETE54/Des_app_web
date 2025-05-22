@@ -7,7 +7,7 @@ exports.signup = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(contraseña, 10);
-    const query = 'INSERT INTO usuarios (nombre, correo, contraseña) VALUES (?, ?, ?)';
+    const query = 'INSERT INTO usuarios (nombre, correo, contrasenia) VALUES (?, ?, ?)';
     db.query(query, [nombre, correo, hashedPassword], (err, result) => {
       if (err) {
         console.error('Error al registrar usuario:', err);

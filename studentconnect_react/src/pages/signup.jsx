@@ -47,7 +47,7 @@ const RegistroAlumno = () => {
 
       if (response.ok) {
         alert("Registro exitoso");
-        window.location.href = "/ConfigPerfilPage";
+        window.location.href = "/configperfil";
       } else {
         alert(result.message || "Error en el registro");
       }
