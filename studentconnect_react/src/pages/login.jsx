@@ -37,17 +37,31 @@ export default function Login() {
   );
 }
 
-// Simulación de inicio de sesión (puedes conectar con backend si deseas)
-function handleLogin(event) {
+async function handleLogin(event) {
   event.preventDefault();
   const correo = document.getElementById("correo").value;
   const contraseña = document.getElementById("contraseña").value;
 
-  // Aquí iría tu lógica real de login
-  if (correo === "test@correo.com" && contraseña === "1234") {
-    alert("Inicio de sesión exitoso");
-    window.location.href = "/perfil"; // o usar navigate() con React Router
-  } else {
-    alert("Correo o contraseña incorrectos");
+  try {
+    const response = await fetch("http://localhost:3001/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ correo, contraseña }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem("token", data.token);
+      alert("Inicio de sesión exitoso");
+      window.location.href = "/home";
+    } else {
+      alert(data.message || "Correo o contraseña incorrectos");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("No se pudo conectar con el servidor");
   }
 }

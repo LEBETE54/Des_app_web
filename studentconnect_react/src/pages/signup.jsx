@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../componenetes/Home/NavBarHome";
 import "../styles/autenticacion/signup.css";
-// Asegúrate de que el archivo esté en la misma ruta o ajústala
 
 const RegistroAlumno = () => {
   const [formData, setFormData] = useState({
@@ -23,36 +22,38 @@ const RegistroAlumno = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { nombre, correo, contraseña, acuerdo } = formData;
+    const { nombre, correo, contraseña, confirmarContraseña, acuerdo } = formData;
 
     if (!acuerdo) {
       alert('Debes aceptar los términos y condiciones.');
       return;
     }
 
-    try {
-      const data = new FormData();
-      data.append('nombre', nombre);
-      data.append('correo', correo);
-      data.append('contraseña', contraseña);
-      data.append('universidad', ''); // Aquí puedes ajustar si agregas un campo de universidad
+    if (contraseña !== confirmarContraseña) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
 
-      const response = await fetch('guardar_alumno.php', {
-        method: 'POST',
-        body: data,
+    try {
+      const response = await fetch("http://localhost:3001/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ nombre, correo, contraseña }),
       });
 
-      const result = await response.text();
+      const result = await response.json();
 
-      if (response.ok && result.includes('Registro exitoso')) {
-        alert(result);
-        window.location.href = 'configperfil_estudiante.html';
+      if (response.ok) {
+        alert("Registro exitoso");
+        window.location.href = "/configuracion-perfil";
       } else {
-        alert('Error en el registro: ' + result);
+        alert(result.message || "Error en el registro");
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Error al conectar con el servidor');
+      console.error("Error:", error);
+      alert("Error al conectar con el servidor");
     }
   };
 
