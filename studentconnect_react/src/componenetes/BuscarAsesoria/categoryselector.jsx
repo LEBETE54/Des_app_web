@@ -1,14 +1,20 @@
 import "../../styles/BuscarAsesoria/categoryselector.css"
 
-export default function CategorySelector() {
+export default function CategorySelector({ filtroCategoria, setFiltroCategoria }) {
+  const handleSelectChange = (e) => {
+    setFiltroCategoria(e.target.value);
+  };
+
   return (
-    <div className="category-selector">
-      <select defaultValue="category1">
-        <option value="category1">Elige una categoría</option>
-        <option value="category2">Idiomas</option>
-        <option value="category3">Sistemas</option>
-        <option value="category4">Administración</option>
-      </select>
-    </div>
+    <select
+      value={filtroCategoria}
+      onChange={handleSelectChange}
+      className="category-selector"
+    >
+      <option value="">Todas las categorías</option>
+      <option value="Matemáticas">Matemáticas</option>
+      <option value="Programación">Programación</option>
+      <option value="Idiomas">Idiomas</option>
+    </select>
   );
 }
