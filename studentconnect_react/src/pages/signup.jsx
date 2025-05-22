@@ -35,7 +35,7 @@ const RegistroAlumno = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/api/auth/signup", {
+      const response = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const RegistroAlumno = () => {
 
       if (response.ok) {
         alert("Registro exitoso");
-        window.location.href = "/configuracion-perfil";
+        window.location.href = "/ConfigPerfilPage";
       } else {
         alert(result.message || "Error en el registro");
       }
