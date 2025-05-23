@@ -22,7 +22,7 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = (req, res) => {
-  const { correo, contraseña } = req.body;
+  const { correo, contrasenia } = req.body; // Cambiado a "contrasenia"
 
   const query = 'SELECT * FROM usuarios WHERE correo = ?';
   db.query(query, [correo], async (err, results) => {
@@ -32,20 +32,36 @@ exports.login = (req, res) => {
     }
 
     if (results.length === 0) {
-      return res.status(401).json({ message: 'Correo o contraseña incorrectos' });
+      return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
 
     const user = results[0];
-    const isMatch = await bcrypt.compare(contraseña, user.contraseña);
+    
+    try {
+      // Corregido a "contrasenia" (nombre de columna en la BD)
+      const isMatch = await bcrypt.compare(contrasenia, user.contrasenia);
+      
+      if (!isMatch) {
+        return res.status(401).json({ message: 'Credenciales incorrectas' });
+      }
 
-    if (!isMatch) {
-      return res.status(401).json({ message: 'Correo o contraseña incorrectos' });
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+        expiresIn: '1h'
+      });
+
+      res.status(200).json({ 
+        message: 'Autenticación exitosa', 
+        token,
+        user: {
+          id: user.id,
+          nombre: user.nombre,
+          correo: user.correo
+        }
+      });
+      
+    } catch (error) {
+      console.error('Error al comparar contraseñas:', error);
+      res.status(500).json({ message: 'Error en el servidor' });
     }
-
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: '1h'
-    });
-
-    res.status(200).json({ message: 'Autenticación exitosa', token });
   });
 };
