@@ -13,17 +13,17 @@ const Sidebar = ({ activeSection }) => {
             </Link>
           </li>
           <li className={activeSection === 'buscar' ? 'active' : ''}>
-            <Link to="/buscar-asesorias">
+            <Link to="/dashboard/buscar-asesorias">
               <i className="fas fa-search"></i> Buscar Asesoría
             </Link>
           </li>
           <li className={activeSection === 'mis-asesorias' ? 'active' : ''}>
-            <Link to="/mis-asesorias">
+            <Link to="/dashboard/mis-asesorias">
               <i className="fas fa-list"></i> Mis Asesorías
             </Link>
           </li>
           <li className={activeSection === 'recursos' ? 'active' : ''}>
-            <Link to="/recursos">
+            <Link to="/dashboard/recursos">
               <i className="fas fa-book"></i> Recursos
             </Link>
           </li>
