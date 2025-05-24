@@ -81,50 +81,40 @@ const ProfileConfig = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setError('');
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
-  const formData = new FormData();
-  formData.append('carrera', formDataState.carrera);
-  formData.append('semestre', formDataState.semestre);
-  formData.append('especialidad', formDataState.especialidad);
-  formData.append('habilidades', JSON.stringify(formDataState.habilidades));
-  
-  if (formDataState.foto) {
-    formData.append('foto', formDataState.foto);
-  }
-
-  try {
-    const response = await fetch('http://localhost:3001/api/profile/update', {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
-      body: formData
-    });
-
-    const result = await response.json();
+    const data = new FormData();
+    data.append('carrera', formData.carrera);
+    data.append('semestre', formData.semestre);
+    data.append('especialidad', formData.especialidad);
+    data.append('habilidades', JSON.stringify(formData.habilidades));
     
-    if (!response.ok || !result.success) {
-      throw new Error(result.message || 'Error al actualizar el perfil');
+    if (formData.foto) data.append('foto', formData.foto);
+    formData.certificados.forEach(cert => data.append('certificado', cert));
+
+    try {
+      const response = await fetch('http://localhost:3000/api/profile/update', {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: formData
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) throw new Error(result.message || 'Error al actualizar');
+
+      navigate('/dashboard', { state: { success: true } });
+    } catch (error) {
+      console.error('Error:', error);
+      setError(error.message || 'Error al guardar cambios');
+    } finally {
+      setLoading(false);
     }
-
-    // Actualizar estado global si usas context/redux
-    localStorage.setItem('userData', JSON.stringify(result.user));
-    
-    navigate(result.redirect, {
-      state: {
-        userData: result.user
-      }
-    });
-
-  } catch (error) {
-    setError(error.message);
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <div className="profile-config-container">
