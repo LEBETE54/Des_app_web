@@ -8,7 +8,6 @@
 .dashboard-content {
   display: flex;
   flex-grow: 1;
-  margin-top: 60px; /* Altura del navbar */
 }
 
 .dashboard-main {
