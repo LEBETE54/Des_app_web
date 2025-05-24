@@ -1,12 +1,12 @@
-import Navbar from "../componenetes/Recursos/navbar";
-import RecursosGrid from "../componenetes/Recursos/RecursosGrid.jsx";
+import Sidebar from "../componenetes/Dashboard/Sidebar.jsx";
+import Navbardash from "../componenetes/Dashboard/NavBardash.jsx";
 import "../styles/Recursos/global.css"; // estilos generales opcionales
 
 export default function RecursosPage() {
   return (
     <>
-      <Navbar />
-      <RecursosGrid />
+      <Navbardash />
+      <Sidebar />
     </>
   );
 }
