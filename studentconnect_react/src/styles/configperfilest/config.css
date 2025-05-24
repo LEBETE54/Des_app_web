@@ -1,4 +1,3 @@
-
 /* Contenedor principal */
 .profile-config-container {
   max-width: 800px;
@@ -9,7 +8,7 @@
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
-/* Botón Guardar Cambios */
+/* Botón principal de enviar */
 .submit-button {
   background: #007bff;
   color: white;
@@ -21,6 +20,8 @@
   transition: all 0.3s ease;
   display: block;
   margin: 2rem auto 0;
+  width: 100%;
+  max-width: 300px;
 }
 
 .submit-button:hover {
@@ -29,7 +30,7 @@
   box-shadow: 0 5px 15px rgba(0,123,255,0.3);
 }
 
-/* Sección de Habilidades - Mejoras */
+/* Sección de Habilidades */
 .skills-input-container {
   display: flex;
   gap: 10px;
@@ -93,7 +94,36 @@
   color: #dc3545;
 }
 
-/* Certificados - Ajuste adicional */
+/* Sección de Certificados */
+.certificates-input-container {
+  position: relative;
+  margin-top: 1rem;
+}
+
+#certificate-input {
+  display: none; /* Oculta el input original */
+}
+
+.custom-file-upload {
+  background: #007bff;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  border: none;
+  width: 100%;
+  justify-content: center;
+}
+
+.custom-file-upload:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
 .selected-certificates {
   margin-top: 1rem;
 }
@@ -108,7 +138,7 @@
   align-items: center;
 }
 
-/* Ajustes generales de espaciado */
+/* Estilos generales */
 .form-section {
   margin-bottom: 2rem;
   padding: 1.5rem;
@@ -132,4 +162,24 @@
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: #495057;
+}
+
+.required {
+  color: #dc3545;
+  margin-left: 3px;
+}
+
+.setup-subtitle {
+  color: #6c757d;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.fa-spinner {
+  margin-right: 0.5rem;
+}
+
+/* Ajuste para alineación de iconos */
+.custom-file-upload i {
+  margin-right: 8px;
 }

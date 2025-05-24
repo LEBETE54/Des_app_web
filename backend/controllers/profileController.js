@@ -1,40 +1,39 @@
 const db = require('../models/db');
 
-exports.updateProfile = async (req, res) => {
+exports.setupProfile = async (req, res) => {
   const { carrera, semestre, especialidad, habilidades } = req.body;
   const userId = req.user.id;
 
   try {
-    // 1. Actualizar datos principales con manejo seguro de archivos
-    const fotoPath = req.files?.foto?.[0]?.path || null;
-    
+    // 1. Actualizar usuario
     await db.query(
-      `UPDATE usuarios 
-       SET carrera = ?, 
-           semestre = ?, 
-           especialidad = ?,
-           foto_perfil = COALESCE(?, foto_perfil)
-       WHERE id = ?`,
-      [carrera, semestre, especialidad, fotoPath, userId]
+      `UPDATE usuarios SET 
+        carrera = ?, 
+        semestre = ?, 
+        especialidad = ?,
+        foto_perfil = ?
+      WHERE id = ?`,
+      [
+        carrera,
+        semestre,
+        especialidad,
+        req.files?.foto?.[0]?.path || null,
+        userId
+      ]
     );
 
-    // 2. Manejar habilidades con transacción
-    await db.query('START TRANSACTION');
-    
-    await db.query('DELETE FROM habilidades WHERE usuario_id = ?', [userId]);
-    
-    if (habilidades && JSON.parse(habilidades).length > 0) {
-      const insertHabilidades = JSON.parse(habilidades).map(habilidad => 
-        [userId, habilidad]
-      );
+    // 2. Insertar habilidades
+    if (habilidades) {
+      const habilidadesArray = JSON.parse(habilidades);
+      const values = habilidadesArray.map(habilidad => [userId, habilidad]);
       
       await db.query(
         'INSERT INTO habilidades (usuario_id, habilidad) VALUES ?',
-        [insertHabilidades]
+        [values]
       );
     }
 
-    // 3. Manejar certificados con validación
+    // 3. Insertar certificados (opcional)
     if (req.files?.certificado) {
       const certificadosData = req.files.certificado.map(cert => ({
         usuario_id: userId,
@@ -51,24 +50,13 @@ exports.updateProfile = async (req, res) => {
       );
     }
 
-    await db.query('COMMIT');
-    
-    // 4. Respuesta mejorada para el frontend
-    res.status(200).json({
-      success: true,
-      message: 'Perfil actualizado exitosamente',
-      redirect: '/dashboard',
-      foto_perfil: fotoPath
-    });
+    res.status(201).json({ success: true });
 
   } catch (error) {
-    await db.query('ROLLBACK');
-    console.error('Error al actualizar perfil:', error);
-    
-    res.status(500).json({
+    console.error('Error:', error);
+    res.status(500).json({ 
       success: false,
-      message: error.message || 'Error en el servidor',
-      errorDetails: process.env.NODE_ENV === 'development' ? error : undefined
+      message: 'Error en el servidor: ' + error.message 
     });
   }
 };

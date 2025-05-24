@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const upload = require('../config/multer');
-const profileController = require('../controllers/profileController');
-const authMiddleware = require('../middleware/authMiddleware');
+const verifyToken = require('../middlewares/verifyToken');
 
-router.put(
-  '/',
-  authMiddleware,
-  upload.fields([
-    { name: 'foto', maxCount: 1 },
-    { name: 'certificado', maxCount: 5 }
-  ]),
-  profileController.updateProfile
-);
+// Actualiza el perfil
+router.put('/update', verifyToken, (req, res) => {
+  // Lógica para actualizar perfil
+  res.json({ message: 'Perfil actualizado' });
+});
+
+// Obtener perfil
+router.get('/', verifyToken, (req, res) => {
+  // Lógica para obtener datos del perfil
+  res.json({ carrera: 'Ejemplo', semestre: 6 });
+});
 
 module.exports = router;

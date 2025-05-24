@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProfilePhoto from '../componenetes/configperfilest/ProfilePhoto';
 import '../styles/configperfilest/config.css';
 
-const ProfileConfig = () => {
+const ConfigPerfilPage = () => {
   const [formData, setFormData] = useState({
     carrera: '',
     semestre: '',
@@ -19,37 +19,8 @@ const ProfileConfig = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/profile', {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        
-        if (!response.ok) throw new Error('Error cargando perfil');
-        
-        const data = await response.json();
-        setFormData(prev => ({
-          ...prev,
-          carrera: data.carrera || '',
-          semestre: data.semestre || '',
-          especialidad: data.especialidad || '',
-          habilidades: data.habilidades || [],
-          foto: data.foto_perfil || null
-        }));
-        setPreview(data.foto_perfil || '');
-      } catch (error) {
-        console.error('Error:', error);
-        setError('Error al cargar el perfil');
-      }
-    };
-
-    fetchProfileData();
-  }, []);
-
-  const handleHabilidad = () => {
+  const handleHabilidad = (e) => {
+    e.preventDefault();
     if (formData.nuevaHabilidad.trim()) {
       setFormData(prev => ({
         ...prev,
@@ -73,17 +44,17 @@ const ProfileConfig = () => {
     }
   };
 
-  const handleCertificates = (files) => {
-    setFormData(prev => ({
-      ...prev,
-      certificados: [...prev.certificados, ...Array.from(files)]
-    }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+
+    // Validación de campos requeridos
+    if (!formData.carrera || !formData.semestre) {
+      setError('¡Carrera y semestre son campos obligatorios!');
+      setLoading(false);
+      return;
+    }
 
     const data = new FormData();
     data.append('carrera', formData.carrera);
@@ -95,8 +66,8 @@ const ProfileConfig = () => {
     formData.certificados.forEach(cert => data.append('certificado', cert));
 
     try {
-      const response = await fetch('http://localhost:3000/api/profile/update', {
-        method: 'PUT',
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/profile/setup`, {
+        method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
@@ -105,12 +76,24 @@ const ProfileConfig = () => {
 
       const result = await response.json();
       
-      if (!response.ok) throw new Error(result.message || 'Error al actualizar');
+      if (!response.ok) {
+        throw new Error(result.message || 'Error completando el perfil');
+      }
 
-      navigate('/dashboard', { state: { success: true } });
+      // Redirección directa al dashboard
+      navigate('/dashboard', { 
+        state: { 
+          success: true,
+          userData: {
+            ...formData,
+            foto_perfil: preview
+          }
+        }
+      });
+
     } catch (error) {
       console.error('Error:', error);
-      setError(error.message || 'Error al guardar cambios');
+      setError(error.message || 'Error al guardar la configuración');
     } finally {
       setLoading(false);
     }
@@ -118,7 +101,8 @@ const ProfileConfig = () => {
 
   return (
     <div className="profile-config-container">
-      <h2>Configuración de Perfil</h2>
+      <h2>Completa Tu Perfil</h2>
+      <p className="setup-subtitle">Por favor completa esta información para continuar</p>
       
       {error && <div className="error-message">{error}</div>}
 
@@ -130,6 +114,7 @@ const ProfileConfig = () => {
             fotoUrl={preview}
             onPhotoChange={handlePhotoChange}
             editable
+            required
           />
         </div>
 
@@ -138,23 +123,25 @@ const ProfileConfig = () => {
           <h3>Información Académica</h3>
           
           <div className="form-group">
-            <label>Carrera:</label>
+            <label>Carrera: <span className="required">*</span></label>
             <input
               type="text"
               value={formData.carrera}
               onChange={(e) => setFormData({...formData, carrera: e.target.value})}
               placeholder="Ej: Ingeniería de Software"
+              required
             />
           </div>
 
           <div className="form-group">
-            <label>Semestre:</label>
+            <label>Semestre: <span className="required">*</span></label>
             <input
               type="number"
               value={formData.semestre}
               onChange={(e) => setFormData({...formData, semestre: e.target.value})}
               min="1"
               max="12"
+              required
             />
           </div>
 
@@ -178,8 +165,8 @@ const ProfileConfig = () => {
               type="text"
               value={formData.nuevaHabilidad}
               onChange={(e) => setFormData({...formData, nuevaHabilidad: e.target.value})}
-              placeholder="Añade una nueva habilidad"
-              onKeyPress={(e) => e.key === 'Enter' && handleHabilidad()}
+              placeholder="Ej: React, Node.js, Diseño UI"
+              onKeyPress={(e) => e.key === 'Enter' && handleHabilidad(e)}
             />
             <button
               type="button"
@@ -206,20 +193,23 @@ const ProfileConfig = () => {
           </div>
         </div>
 
-        {/* Sección Certificados */}
+        {/* Sección Certificados (Opcional) */}
         <div className="form-section">
-          <h3>Certificados</h3>
+          <h3>Certificados (Opcional)</h3>
           
           <div className="certificates-input-container">
             <input
               type="file"
               multiple
-              onChange={(e) => handleCertificates(e.target.files)}
+              onChange={(e) => setFormData(prev => ({
+                ...prev,
+                certificados: [...prev.certificados, ...Array.from(e.target.files)]
+              }))}
               accept="application/pdf"
               id="certificate-input"
             />
             <label htmlFor="certificate-input" className="custom-file-upload">
-              Seleccionar Archivos PDF
+              <i className="fas fa-upload"></i> Seleccionar Archivos
             </label>
             
             <div className="selected-certificates">
@@ -246,11 +236,17 @@ const ProfileConfig = () => {
           className="submit-button"
           disabled={loading}
         >
-          {loading ? 'Guardando...' : 'Guardar Cambios'}
+          {loading ? (
+            <>
+              <i className="fas fa-spinner fa-spin"></i> Guardando...
+            </>
+          ) : (
+            'Finalizar Configuración'
+          )}
         </button>
       </form>
     </div>
   );
 };
 
-export default ProfileConfig;
+export default ConfigPerfilPage;
