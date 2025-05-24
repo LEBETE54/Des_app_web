@@ -1,29 +1,29 @@
-const db = require('../models/db');
-
 exports.setupProfile = async (req, res) => {
-  const { carrera, semestre, especialidad, habilidades } = req.body;
   const userId = req.user.id;
+  const { carrera, semestre, especialidad, habilidades } = req.body;
 
   try {
-    // 1. Actualizar usuario
-    await db.query(
+    // 1. Validar campos requeridos
+    if (!carrera || !semestre) {
+      return res.status(400).json({ success: false, message: 'Campos requeridos faltantes' });
+    }
+
+    // 2. Manejar foto de perfil
+    const fotoPath = req.files?.foto?.[0]?.path || null;
+
+    // 3. Actualizar usuario
+    const [updateResult] = await db.query(
       `UPDATE usuarios SET 
         carrera = ?, 
         semestre = ?, 
         especialidad = ?,
         foto_perfil = ?
       WHERE id = ?`,
-      [
-        carrera,
-        semestre,
-        especialidad,
-        req.files?.foto?.[0]?.path || null,
-        userId
-      ]
+      [carrera, semestre, especialidad, fotoPath, userId]
     );
 
-    // 2. Insertar habilidades
-    if (habilidades) {
+    // 4. Insertar habilidades
+    if (habilidades && habilidades.length > 0) {
       const habilidadesArray = JSON.parse(habilidades);
       const values = habilidadesArray.map(habilidad => [userId, habilidad]);
       
@@ -33,7 +33,7 @@ exports.setupProfile = async (req, res) => {
       );
     }
 
-    // 3. Insertar certificados (opcional)
+    // 5. Insertar certificados
     if (req.files?.certificado) {
       const certificadosData = req.files.certificado.map(cert => ({
         usuario_id: userId,
@@ -43,20 +43,21 @@ exports.setupProfile = async (req, res) => {
       }));
       
       await db.query(
-        `INSERT INTO certificados 
-          (usuario_id, nombre, archivo, fecha)
-         VALUES ?`,
+        `INSERT INTO certificados (usuario_id, nombre, archivo, fecha) VALUES ?`,
         [certificadosData.map(c => [c.usuario_id, c.nombre, c.archivo, c.fecha])]
       );
     }
 
-    res.status(201).json({ success: true });
+    res.status(200).json({ 
+      success: true,
+      redirect: '/dashboard'
+    });
 
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       success: false,
-      message: 'Error en el servidor: ' + error.message 
+      message: 'Error en el servidor: ' + error.message
     });
   }
 };

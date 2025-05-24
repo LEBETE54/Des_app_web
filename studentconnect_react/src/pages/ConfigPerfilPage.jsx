@@ -58,7 +58,7 @@ const ConfigPerfilPage = () => {
 
     const data = new FormData();
     data.append('carrera', formData.carrera);
-    data.append('semestre', formData.semestre);
+    data.append('semestre', formData.semestre.toString()); // Asegurar que sea string
     data.append('especialidad', formData.especialidad);
     data.append('habilidades', JSON.stringify(formData.habilidades));
     
@@ -77,19 +77,11 @@ const ConfigPerfilPage = () => {
       const result = await response.json();
       
       if (!response.ok) {
-        throw new Error(result.message || 'Error completando el perfil');
+        throw new Error(result.message || 'Error al completar el perfil');
       }
 
-      // Redirección directa al dashboard
-      navigate('/dashboard', { 
-        state: { 
-          success: true,
-          userData: {
-            ...formData,
-            foto_perfil: preview
-          }
-        }
-      });
+      // Redirección forzada para actualizar estado global
+      window.location.href = '/dashboard';
 
     } catch (error) {
       console.error('Error:', error);
