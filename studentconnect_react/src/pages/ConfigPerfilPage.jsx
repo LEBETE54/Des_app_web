@@ -73,8 +73,14 @@ const ConfigPerfilPage = () => {
     }
     
   } catch (error) {
-    console.error('Error:', error);
-    setError(error.response?.data?.message || 'Error al guardar configuración');
+    const errorMessage = error.response?.data?.message || 
+                        error.message || 
+                        'Error desconocido';
+    console.error("Detalles del error:", {
+      response: error.response,
+      request: error.request
+    });
+    setError(`Error: ${errorMessage}`);
   } finally {
     setLoading(false);
   }
