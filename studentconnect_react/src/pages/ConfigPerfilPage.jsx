@@ -66,30 +66,19 @@ const ConfigPerfilPage = () => {
     formData.certificados.forEach(cert => data.append('certificado', cert));
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/profile/setup`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: data
-      });
-
-      const result = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(result.message || 'Error al completar el perfil');
-      }
-
-      // Redirección forzada para actualizar estado global
-      window.location.href = '/dashboard';
-
-    } catch (error) {
-      console.error('Error:', error);
-      setError(error.message || 'Error al guardar la configuración');
-    } finally {
-      setLoading(false);
+    const response = await API.post('/profile/setup', data);
+    
+    if (response.data.success) {
+      window.location.href = '/dashboard'; // Redirección forzada
     }
-  };
+    
+  } catch (error) {
+    console.error('Error:', error);
+    setError(error.response?.data?.message || 'Error al guardar configuración');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="profile-config-container">
