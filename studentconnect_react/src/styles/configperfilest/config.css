@@ -1,0 +1,135 @@
+
+/* Contenedor principal */
+.profile-config-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* Botón Guardar Cambios */
+.submit-button {
+  background: #007bff;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 2rem auto 0;
+}
+
+.submit-button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+}
+
+/* Sección de Habilidades - Mejoras */
+.skills-input-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.skills-input-container input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
+.add-skill-button {
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-skill-button:hover {
+  background: #218838;
+  transform: scale(1.05);
+}
+
+/* Tags de habilidades */
+.skills-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  background: #e9ecef;
+  color: #495057;
+  padding: 6px 15px;
+  border-radius: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  border: 1px solid #dee2e6;
+}
+
+.remove-skill-button {
+  background: none;
+  border: none;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 5px;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.remove-skill-button:hover {
+  color: #dc3545;
+}
+
+/* Certificados - Ajuste adicional */
+.selected-certificates {
+  margin-top: 1rem;
+}
+
+.certificate-item {
+  background: #f8f9fa;
+  padding: 8px 15px;
+  border-radius: 15px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Ajustes generales de espaciado */
+.form-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.form-section h3 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #007bff;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #495057;
+}
