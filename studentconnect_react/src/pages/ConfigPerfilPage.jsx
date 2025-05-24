@@ -100,7 +100,7 @@ const ProfileConfig = () => {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: formData
+        body: data
       });
 
       const result = await response.json();
