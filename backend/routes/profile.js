@@ -5,7 +5,7 @@ const profileController = require('../controllers/profileController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 router.put(
-  '/profile',
+  '/',
   authMiddleware,
   upload.fields([
     { name: 'foto', maxCount: 1 },
