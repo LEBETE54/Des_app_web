@@ -31,7 +31,7 @@ export default function Login() {
       }
 
       localStorage.setItem("token", data.token);
-      navigate("/home");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error:", error);
       setError(error.message || "Error al iniciar sesión");

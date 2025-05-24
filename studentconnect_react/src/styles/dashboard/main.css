@@ -1,0 +1,95 @@
+/* Estructura principal */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-grow: 1;
+  margin-top: 60px; /* Altura del navbar */
+}
+
+.dashboard-main {
+  flex-grow: 1;
+  padding: 2rem;
+  margin-left: 250px; /* Ancho del sidebar */
+  background: #f8f9fa;
+}
+
+/* Sección de Perfil */
+.profile-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #007bff;
+}
+
+.profile-info h2 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+/* Habilidades */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.skill-card {
+  background: #e9ecef;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.skill-card:hover {
+  transform: translateY(-3px);
+  background: #dee2e6;
+}
+
+/* Asesorías */
+.asesorias-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.asesoria-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-left: 4px solid #007bff;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.status.pendiente { background: #fff3cd; color: #856404; }
+.status.completada { background: #d4edda; color: #155724; }
+.status.cancelada { background: #f8d7da; color: #721c24; }

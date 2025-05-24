@@ -6,12 +6,14 @@ import ConfigPerfilPage from "./pages/ConfigPerfilPage";
 import Comentarios from "./pages/Comentarios";
 import Signup from "./pages/signup"; // si ya la tienes
 import Login from "./pages/login"; // si ya la tienes
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/Comentarios" element={<Comentarios />} />
         <Route path="/configperfil" element={<ConfigPerfilPage />} />
         <Route path="/Recursos" element={<Recursos />} />

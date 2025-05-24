@@ -100,14 +100,14 @@ const ProfileConfig = () => {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: data
+        body: formData
       });
 
       const result = await response.json();
       
       if (!response.ok) throw new Error(result.message || 'Error al actualizar');
 
-      navigate('/perfil', { state: { success: true } });
+      navigate('/dashboard', { state: { success: true } });
     } catch (error) {
       console.error('Error:', error);
       setError(error.message || 'Error al guardar cambios');
