@@ -1,7 +1,7 @@
 .dashboard-sidebar {
   width: 250px;
   height: calc(100vh - 60px);
-  position: fixed;
+  position:absolute;
   left: 0;
   background: white;
   box-shadow: 4px 0 15px rgba(0,0,0,0.05);
