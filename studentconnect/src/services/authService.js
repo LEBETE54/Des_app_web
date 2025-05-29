@@ -1,12 +1,11 @@
-// Archivo: frontend/src/services/authService.js
-import apiClient from './apiClient'; // Asegúrate que la ruta sea correcta
+import apiClient from './apiClient'; 
 
-const API_URL_AUTH = '/auth'; // La baseURL ('http://localhost:4000/api') ya está en apiClient
+const API_URL_AUTH = '/auth'; // 
 
 const register = async (userData) => {
     try {
         const response = await apiClient.post(`${API_URL_AUTH}/register`, userData);
-        if (response.data.token && response.data.usuario) { // Verifica que el backend devuelva 'usuario'
+        if (response.data.token && response.data.usuario) { 
             localStorage.setItem('studentConnectUser', JSON.stringify(response.data.usuario));
             localStorage.setItem('studentConnectToken', response.data.token);
         }
@@ -23,7 +22,6 @@ const login = async (credentials) => {
         if (response.data.token && response.data.usuario) { // Verifica que el backend devuelva 'usuario'
             localStorage.setItem('studentConnectUser', JSON.stringify(response.data.usuario));
             localStorage.setItem('studentConnectToken', response.data.token);
-            // console.log('Login service: Token and user saved to localStorage'); // Para depuración
         }
         return response.data;
     } catch (error) {
@@ -32,17 +30,14 @@ const login = async (credentials) => {
     }
 };
 
-// --- FUNCIONES CORREGIDAS/IMPLEMENTADAS ---
 const logout = () => {
     localStorage.removeItem('studentConnectUser');
     localStorage.removeItem('studentConnectToken');
-    // console.log('Logout service: Token and user removed from localStorage'); // Para depuración
-    // No es necesario devolver nada aquí, o puedes devolver true/void
+    
 };
 
 const getCurrentUser = () => {
     const userStr = localStorage.getItem('studentConnectUser');
-    // console.log('GetCurrentUser service: userStr from localStorage:', userStr); // Para depuración
     if (userStr) {
         try {
             return JSON.parse(userStr);
@@ -57,10 +52,8 @@ const getCurrentUser = () => {
 
 const getToken = () => {
     const token = localStorage.getItem('studentConnectToken');
-    // console.log('GetToken service: token from localStorage:', token); // Para depuración
     return token;
 };
-// --- FIN DE FUNCIONES CORREGIDAS/IMPLEMENTADAS ---
 
 const authService = {
     register,

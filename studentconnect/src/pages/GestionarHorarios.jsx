@@ -1,4 +1,3 @@
-// Ruta: frontend/src/pages/GestionarHorarios.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
@@ -103,7 +102,6 @@ const GestionarHorarios = () => {
             setIsLoading(false); return;
         }
 
-        // ---- DEBUG: VER QUÉ SE ENVÍA ----
         console.log("FRONTEND: Datos que se enviarán al backend (dataParaEnviar):", JSON.stringify(dataParaEnviar, null, 2));
         // ---------------------------------
 
@@ -222,7 +220,6 @@ const GestionarHorarios = () => {
                 </form>
 
                 <h2>Mis Periodos Publicados</h2>
-                {/* ... (lista de misPeriodos, sin cambios) ... */}
             </div>
         </>
     );

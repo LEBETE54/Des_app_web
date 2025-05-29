@@ -1,12 +1,9 @@
-// Ruta: frontend/src/components/BuscarAsesorias.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 import useAuthStore from '../store/authStore';
 import horarioService from '../services/horarioService';
 import materiaService from '../services/materiaService';
-import { useNavigate } from 'react-router-dom'; // Para redirigir si no está logueado para reservar
-// import '../styles/BuscarAsesorias.css'; // Crea este archivo para estilos
+import { useNavigate } from 'react-router-dom'; 
 
-// Componente para una tarjeta de Asesoría individual
 const AsesoriaCard = ({ asesoria, onReservarClick, isAuthenticated }) => {
     const formatearFechaParaCard = (fechaString) => {
         if (!fechaString) return 'Fecha no disponible';
@@ -50,7 +47,6 @@ const AsesoriaCard = ({ asesoria, onReservarClick, isAuthenticated }) => {
 
 const BuscarAsesorias = () => {
     const isAuthenticated = useAuthStore(state => state.isAuthenticated);
-    // const user = useAuthStore(state => state.user); // Descomenta si necesitas datos del usuario
     const navigate = useNavigate();
 
     const [asesoriasMostradas, setAsesoriasMostradas] = useState([]);
@@ -78,11 +74,10 @@ const BuscarAsesorias = () => {
         try {
             const filtrosApi = {};
             if (filtroMateria) filtrosApi.materia_id = filtroMateria;
-            // El backend en `findDisponiblesParaReserva` ya filtra por `estado_slot = 'disponible'` y que sean futuras.
-            // Para las pestañas, necesitaremos más lógica o diferentes endpoints.
+          
             
             let horariosFetched = await horarioService.obtenerHorariosDisponiblesParaEstudiantes(filtrosApi);
-            if (!Array.isArray(horariosFetched)) { // Asegurarse de que sea un array
+            if (!Array.isArray(horariosFetched)) { 
                 console.warn("La respuesta de obtenerHorariosDisponiblesParaEstudiantes no fue un array:", horariosFetched);
                 horariosFetched = [];
             }
@@ -90,7 +85,6 @@ const BuscarAsesorias = () => {
             let filtradosPorEstadoYTexto = [];
             const ahora = new Date();
 
-            // Lógica de filtrado por pestañas (simplificada, idealmente el backend ayuda más)
             if (pestanaActiva === 'enEspera') {
                 filtradosPorEstadoYTexto = horariosFetched.filter(a => new Date(`${a.fecha}T${a.hora_inicio}`) > ahora);
             } else if (pestanaActiva === 'activas') {
@@ -100,9 +94,7 @@ const BuscarAsesorias = () => {
                     return inicioAsesoria <= ahora && ahora < finAsesoria;
                 });
             } else if (pestanaActiva === 'terminadas') {
-                // Esta pestaña necesitará un endpoint diferente que traiga horarios pasados o completados.
-                // Por ahora, estará vacía o mostrará un mensaje.
-                // O podríamos filtrar de todosLosDisponibles si el backend los enviara todos (no es el caso actual)
+                
                 filtradosPorEstadoYTexto = []; // Placeholder
                 setError(prev => prev + (prev ? "; " : "") + "La vista de 'terminadas' requiere configuración adicional del backend.");
             }
@@ -139,9 +131,7 @@ const BuscarAsesorias = () => {
             return;
         }
         // Aquí irá la lógica para navegar a una página de confirmación de reserva o abrir un modal.
-        // Pasaremos el horarioId.
         console.log(`Usuario quiere reservar el horario con ID: ${horarioId}`);
-        // navigate(`/reservar-asesoria/${horarioId}`); // Ejemplo de navegación
         alert(`Funcionalidad de reserva para horario ID ${horarioId} aún no implementada.`);
     };
 

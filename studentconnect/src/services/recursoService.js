@@ -1,12 +1,8 @@
-// Ruta: frontend/src/services/recursoService.js
-
-// 1. IMPORTA apiClient UNA SOLA VEZ
-import apiClient from './apiClient'; // Asegúrate que apiClient.js esté en la misma carpeta 'services'
+import apiClient from './apiClient'; 
 
 const API_ENDPOINT_RECURSOS = '/recursos'; // Endpoint del backend para la API de recursos
 
 /**
- * Crea un nuevo recurso. Puede incluir un archivo.
  * @param {FormData} formData - Debe ser un objeto FormData si se incluye un archivo.
  * Contendrá campos como: titulo, descripcion, tipo_recurso,
  * enlace_url (opcional), materia_id_relacionada (opcional),
@@ -14,8 +10,6 @@ const API_ENDPOINT_RECURSOS = '/recursos'; // Endpoint del backend para la API d
  */
 const crearRecurso = async (formData) => {
     try {
-        // apiClient se encarga de la baseURL y de añadir el token de autenticación
-        // Axios configurará automáticamente el Content-Type a 'multipart/form-data' cuando envías FormData.
         const response = await apiClient.post(API_ENDPOINT_RECURSOS, formData);
         return response.data; // Devuelve el recurso creado desde el backend
     } catch (error) {
@@ -24,9 +18,7 @@ const crearRecurso = async (formData) => {
     }
 };
 
-/**
- * Obtiene todos los recursos públicos (o según los filtros que el backend soporte).
- */
+
 const obtenerRecursosPublicos = async () => {
     try {
         // Asume que GET /api/recursos es para recursos públicos o filtrados por el backend
@@ -53,7 +45,7 @@ const obtenerMisRecursos = async () => {
 
 /**
  * Elimina un recurso específico por su ID.
- * @param {number} id - El ID del recurso a eliminar.
+ * @param {number} id 
  */
 const eliminarRecurso = async (id) => {
     try {
@@ -65,14 +57,11 @@ const eliminarRecurso = async (id) => {
     }
 };
 
-// Agrupamos las funciones en un objeto para exportarlas
 const recursoService = {
     crearRecurso,
     obtenerRecursosPublicos,
     obtenerMisRecursos,
     eliminarRecurso,
-    // Aquí podrías añadir más funciones en el futuro, como actualizarRecurso(id, data)
 };
 
-// Exportamos el objeto como la exportación por defecto del módulo
 export default recursoService;

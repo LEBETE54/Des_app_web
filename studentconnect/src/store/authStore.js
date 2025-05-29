@@ -1,12 +1,12 @@
 import { create } from 'zustand';
-import authService from '../services/authService'; // Asegúrate que la ruta al servicio sea correcta
+import authService from '../services/authService'; 
 
 // Definimos el estado inicial y las acciones para nuestro store de autenticación
 const useAuthStore = create((set, get) => ({
     // Estado inicial
-    user: authService.getCurrentUser(),      // Intentamos cargar el usuario desde localStorage al inicio
-    token: authService.getToken(),          // Intentamos cargar el token desde localStorage al inicio
-    isAuthenticated: !!authService.getToken(), // Será true si hay un token al inicio
+    user: authService.getCurrentUser(),      
+    token: authService.getToken(),          
+    isAuthenticated: !!authService.getToken(), 
     isLoading: false,
     error: null,
 
@@ -14,7 +14,7 @@ const useAuthStore = create((set, get) => ({
     registerUser: async (userData) => {
         set({ isLoading: true, error: null });
         try {
-            const data = await authService.register(userData); // El servicio ya guarda en localStorage
+            const data = await authService.register(userData); 
             set({
                 user: data.usuario,
                 token: data.token,
@@ -22,7 +22,7 @@ const useAuthStore = create((set, get) => ({
                 isLoading: false,
                 error: null,
             });
-            return data; // Devuelve la respuesta completa por si el componente la necesita
+            return data; 
         } catch (error) {
             const errorMessage = error.mensaje || 'Error al registrar. Intenta de nuevo.';
             set({
@@ -32,7 +32,7 @@ const useAuthStore = create((set, get) => ({
                 user: null,
                 token: null,
             });
-            throw error; // Relanzamos el error para que el componente lo maneje si es necesario
+            throw error; 
         }
     },
 
@@ -40,7 +40,7 @@ const useAuthStore = create((set, get) => ({
     loginUser: async (credentials) => {
         set({ isLoading: true, error: null });
         try {
-            const data = await authService.login(credentials); // El servicio ya guarda en localStorage
+            const data = await authService.login(credentials); 
             set({
                 user: data.usuario,
                 token: data.token,
@@ -64,33 +64,17 @@ const useAuthStore = create((set, get) => ({
 
     // Acción para cerrar sesión
     logoutUser: () => {
-        authService.logout(); // El servicio limpia localStorage
+        authService.logout(); 
         set({
             user: null,
             token: null,
             isAuthenticated: false,
             error: null,
         });
-        // Aquí podrías redirigir al usuario a la página de inicio o login si es necesario
-        // window.location.href = '/login'; (no siempre es la mejor práctica hacerlo desde el store)
+        
     },
 
-    // (Opcional) Acción para inicializar o verificar el estado de autenticación al cargar la app
-    // Esto ya se hace parcialmente al definir el estado inicial, pero una función explícita puede ser útil
-    // si necesitas re-validar el token con el backend, por ejemplo.
-    // Por ahora, la carga inicial desde localStorage es suficiente.
-    // checkAuthStatus: () => {
-    //   const token = get().token;
-    //   const user = get().user;
-    //   if (token && user) {
-    //     set({ isAuthenticated: true });
-    //     // Aquí podrías añadir una llamada al backend para validar el token si quisieras más seguridad
-    //   } else {
-    //     set({ isAuthenticated: false, user: null, token: null });
-    //   }
-    // }
-
-    // Acción para limpiar errores manualmente si es necesario
+   
     clearError: () => {
         set({ error: null });
     }

@@ -1,4 +1,3 @@
-// Ruta Correcta: frontend/src/services/horarioService.js
 import apiClient from './apiClient'; 
 
 const API_ENDPOINT_HORARIOS = '/horarios'; // Esto está bien
@@ -15,7 +14,6 @@ const crearHorario = async (horarioData) => {
 
 const obtenerMisHorarios = async () => {
     try {
-        // Esta URL está bien construida con template literals
         const response = await apiClient.get(`${API_ENDPOINT_HORARIOS}/mis-horarios`);
         return response.data;
     } catch (error) {
@@ -26,7 +24,6 @@ const obtenerMisHorarios = async () => {
 
 const obtenerHorarioPorId = async (id) => {
     try {
-        // CORRECCIÓN AQUÍ: Usar comillas invertidas (`) y ${} para interpolar
         const response = await apiClient.get(`${API_ENDPOINT_HORARIOS}/${id}`);
         return response.data;
     } catch (error) {
@@ -37,7 +34,6 @@ const obtenerHorarioPorId = async (id) => {
 
 const actualizarHorario = async (id, horarioData) => {
     try {
-        // CORRECCIÓN AQUÍ: Usar comillas invertidas (`) y ${} para interpolar
         const response = await apiClient.put(`${API_ENDPOINT_HORARIOS}/${id}`, horarioData);
         return response.data;
     } catch (error) {
@@ -48,7 +44,6 @@ const actualizarHorario = async (id, horarioData) => {
 
 const eliminarHorario = async (id) => {
     try {
-        // CORRECCIÓN AQUÍ: Usar comillas invertidas (`) y ${} para interpolar
         const response = await apiClient.delete(`${API_ENDPOINT_HORARIOS}/${id}`);
         return response.data;
     } catch (error) {
@@ -59,7 +54,6 @@ const eliminarHorario = async (id) => {
 
 const obtenerHorariosDisponiblesParaEstudiantes = async (filtros = {}) => {
     try {
-        // Esta URL está bien construida con template literals
         const response = await apiClient.get(`${API_ENDPOINT_HORARIOS}/disponibles-para-reserva`, { params: filtros });
         return response.data;
     } catch (error) {

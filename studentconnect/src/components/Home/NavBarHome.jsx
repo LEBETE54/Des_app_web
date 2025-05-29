@@ -1,11 +1,9 @@
-// Ruta completa: frontend/src/components/Home/NavBarHome.jsx
 
-import logo from "../../assets/LogoV2.svg"; // Ajusta la ruta a tu logo
+import logo from "../../assets/LogoV2.svg"; 
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../../store/authStore';
-// shallow ya no es estrictamente necesario aquí si seleccionamos individualmente
-import "../../styles/Home/NavBarHome.css"; // Ajusta la ruta a tus estilos
+import "../../styles/Home/NavBarHome.css"; 
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -57,12 +55,12 @@ export default function Navbar() {
                     )}
                 </ul>
                 <div className="toggle_btn" onClick={() => setMenuOpen(!menuOpen)}>
-                    <i className={menuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"}></i> {/* Asegúrate de tener FontAwesome si usas estas clases */}
+                    <i className={menuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"}></i> 
                 </div>
             </div>
 
             {menuOpen && (
-                <div className="dropdown_menu"> {/* Adapta esta clase y contenido a tu diseño */}
+                <div className="dropdown_menu"> 
                     {isAuthenticated ? (
                         <>
                             {user && <li><Link to="/dashboard" onClick={() => setMenuOpen(false)}>Hola, {user.nombre_completo || user.correo}</Link></li>}

@@ -1,12 +1,8 @@
-// Ruta: frontend/src/components/CrearAsesoria.jsx (o pages/GestionarHorarios.jsx)
-// Asegúrate de que el nombre y la ruta del archivo coincidan con lo que usas.
-
 import React, { useEffect, useState, useCallback } from 'react';
-import useAuthStore from '../store/authStore'; // Ajusta la ruta si es diferente
-// Este servicio debe apuntar al backend que maneja la tabla horarios_disponibles_asesor
-import horarioService from '../services/horarioService'; // Usa este en lugar de asesoriaService si los datos van a horarios_disponibles_asesor
-import materiaService from '../services/materiaService'; // Para el dropdown de materias
-import '../styles/components/CrearAsesoria.css'; // Asegúrate que el CSS exista
+import useAuthStore from '../store/authStore'; 
+import horarioService from '../services/horarioService'; 
+import materiaService from '../services/materiaService'; 
+import '../styles/components/CrearAsesoria.css'; 
 
 const CrearAsesoria = () => {
     const isAuthenticated = useAuthStore(state => state.isAuthenticated);
@@ -14,21 +10,21 @@ const CrearAsesoria = () => {
     const esAsesor = isAuthenticated && currentUser?.rol === 'asesor';
 
     const [mostrarForm, setMostrarForm] = useState(false);
-    const [asesorias, setAsesorias] = useState([]); // Lista de periodos publicados por el asesor
+    const [asesorias, setAsesorias] = useState([]); 
 
     // Estado del formulario para definir un periodo de asesoría
     const [form, setForm] = useState({
-        titulo_asesoria: '',       // Corresponde a 'titulo_asesoria' en la BD
-        descripcion_asesoria: '',  // Corresponde a 'descripcion_asesoria'
-        materia_id: '',            // Corresponde a 'materia_id'
-        fechaInicio: '',           // Input de fecha de inicio (YYYY-MM-DD)
-        horaInicio: '09:00',       // Input de hora de inicio (HH:MM), con default
-        fechaFin: '',             // Input de fecha de fin (YYYY-MM-DD)
-        horaFin: '17:00',         // Input de hora de fin (HH:MM), con default
-        modalidad: 'virtual',      // Corresponde a 'modalidad'
-        enlace_o_lugar: '',        // Corresponde a 'enlace_o_lugar'
-        max_estudiantes_simultaneos: 1, // Corresponde a 'max_estudiantes_simultaneos'
-        notas_adicionales: ''      // Corresponde a 'notas_adicionales'
+        titulo_asesoria: '',       
+        descripcion_asesoria: '',  
+        materia_id: '',            
+        fechaInicio: '',          
+        horaInicio: '09:00',       
+        fechaFin: '',            
+        horaFin: '17:00',         
+        modalidad: 'virtual',      
+        enlace_o_lugar: '',        
+        max_estudiantes_simultaneos: 1, 
+        notas_adicionales: ''      
     });
     const [editandoId, setEditandoId] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -43,8 +39,7 @@ const CrearAsesoria = () => {
         }
         setIsLoading(true); setError(null);
         try {
-            // Esta función en horarioService debe llamar al backend que usa la tabla horarios_disponibles_asesor
-            // y el modelo corregido que usa fecha_hora_inicio para ordenar.
+          
             const res = await horarioService.obtenerMisHorarios(); 
             setAsesorias((res || []).sort((a,b) => new Date(b.fecha_hora_inicio) - new Date(a.fecha_hora_inicio)));
         } catch (err) {
@@ -60,7 +55,6 @@ const CrearAsesoria = () => {
             setMaterias(res || []);
         } catch (err) {
             console.error("Error al cargar materias:", err);
-            //setError(prev => `${prev} ${err.mensaje || 'Error materias.'}`.trim());
         }
     }, []);
 
@@ -121,7 +115,6 @@ const CrearAsesoria = () => {
 
         try {
             if (editandoId !== null) {
-                // La función actualizarHorario en el servicio debería tomar (id, data)
                 await horarioService.actualizarHorario(editandoId, dataParaEnviar);
                 setSuccessMessage('Periodo de asesoría actualizado exitosamente.');
             } else {
@@ -138,7 +131,6 @@ const CrearAsesoria = () => {
     };
 
     const handleEditar = (periodo) => {
-        // Parsear fecha_hora_inicio y fecha_hora_fin a partes de fecha y hora para los inputs
         const inicio = new Date(periodo.fecha_hora_inicio);
         const fin = new Date(periodo.fecha_hora_fin);
 
@@ -161,7 +153,6 @@ const CrearAsesoria = () => {
     };
 
     const handleEliminar = async (id) => {
-        // ... (la lógica de eliminar que ya tenías debería funcionar si horarioService.eliminarHorario es correcto)
         if (!window.confirm("¿Estás seguro de que quieres eliminar este periodo?")) return;
         setIsLoading(true); setError(null); setSuccessMessage(null);
         try {
@@ -195,7 +186,7 @@ const CrearAsesoria = () => {
                 className="btn-toggle-form"
                 onClick={() => {
                     setMostrarForm(!mostrarForm);
-                    if (!mostrarForm) { // Si se va a mostrar el form, resetea con valores por defecto
+                    if (!mostrarForm) { 
                          setForm({
                             titulo_asesoria: '', descripcion_asesoria: '', materia_id: '',
                             fechaInicio: '', horaInicio: '09:00',

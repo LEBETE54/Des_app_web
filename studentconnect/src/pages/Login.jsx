@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from "../components/Home/NavBarHome.jsx"; // Asegúrate que la ruta sea correcta
-import useAuthStore from '../store/authStore'; // Importamos nuestro store de Zustand
-import '../styles/Login/Login.css'; // Asegúrate que la ruta a tus estilos sea correcta
+import Navbar from "../components/Home/NavBarHome.jsx";
+import useAuthStore from '../store/authStore'; 
+import '../styles/Login/Login.css'; 
 
 const Login = () => {
     const navigate = useNavigate();
     const [correo, setCorreo] = useState('');
     const [contrasenia, setContrasenia] = useState('');
 
-    // Obtenemos las funciones y el estado de nuestro store
     const loginUser = useAuthStore((state) => state.loginUser);
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
     const isLoading = useAuthStore((state) => state.isLoading);
@@ -17,12 +16,10 @@ const Login = () => {
     const clearError = useAuthStore((state) => state.clearError);
 
     useEffect(() => {
-        // Si el usuario ya está autenticado (ej. por recargar la página con un token válido),
-        // lo redirigimos al dashboard.
+        
         if (isAuthenticated) {
             navigate('/dashboard');
         }
-        // Limpiar errores cuando el componente se monta o isAuthenticated cambia
         return () => {
             clearError();
         };
@@ -30,14 +27,11 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        clearError(); // Limpiamos errores previos antes de un nuevo intento
+        clearError(); 
 
         try {
             await loginUser({ correo, contrasenia });
-            // La navegación ahora se maneja con el useEffect de arriba cuando isAuthenticated cambie a true
         } catch (err) {
-            // El error ya se maneja y se establece en el store,
-            // así que no necesitamos hacer mucho aquí, solo evitar que la consola muestre un error no capturado.
             console.error("Fallo en el intento de login:", err.mensaje || err);
         }
     };

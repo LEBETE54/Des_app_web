@@ -1,8 +1,6 @@
-// Ruta: frontend/src/components/dashboard/sidebar.jsx
 import React from 'react';
 import '../../styles/dashboard/sidebar.css'; // Asegúrate que la ruta a tus estilos sea correcta
 
-// Recibe el rol del usuario para mostrar opciones específicas
 const Sidebar = ({ onSelect, usuarioRol, seccionActual }) => { 
   
   const getActiveClass = (seccion) => {
@@ -12,7 +10,6 @@ const Sidebar = ({ onSelect, usuarioRol, seccionActual }) => {
   return (
     <aside className="sidebar">
       <ul>
-        {/* Opciones Comunes o para Estudiantes */}
         <li className={getActiveClass('buscar')} onClick={() => onSelect("buscar")}>
           Buscar asesorías
         </li>
@@ -31,19 +28,16 @@ const Sidebar = ({ onSelect, usuarioRol, seccionActual }) => {
           </>
         )}
 
-        {/* Opciones para Asesores */}
         {usuarioRol === 'asesor' && (
           <li className={getActiveClass('crear')} onClick={() => onSelect("crear")}>
             Publicar Asesorías
           </li>
         )}
         
-        {/* Opción de Recursos (puede ser común o específica) */}
         <li className={getActiveClass('recursos')} onClick={() => onSelect("recursos")}>
           Recursos Compartidos
         </li>
 
-        {/* Puedes añadir más opciones aquí, como "Mi Perfil", etc. */}
       </ul>
     </aside>
   );

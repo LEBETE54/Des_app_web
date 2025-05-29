@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from "../components/Home/NavBarHome.jsx";
 import useAuthStore from '../store/authStore';
-// Ya no necesitas shallow si seleccionas individualmente
 import '../styles/Login/Login.css';
 
 const Register = () => {
@@ -28,25 +27,19 @@ const Register = () => {
     const logoutUser = useAuthStore(state => state.logoutUser);
     const user = useAuthStore(state => state.user);
 
-    // Tus console.log para depuración
-    // console.log('[Register.jsx] Montado/Actualizado. isAuthenticated:', isAuthenticated, 'registrationSuccess:', registrationSuccess, 'user:', user, 'error:', error, 'isLoading:', isLoading);
+    
 
     useEffect(() => {
-        // console.log('[Register.jsx] useEffect post-registro. registrationSuccess:', registrationSuccess, 'isAuthenticated:', isAuthenticated);
         if (registrationSuccess && isAuthenticated) {
-            // console.log('[Register.jsx] Redirigiendo a dashboard...');
             navigate('/dashboard');
         }
     }, [registrationSuccess, isAuthenticated, navigate]);
 
     useEffect(() => {
-        // console.log('[Register.jsx] useEffect limpieza errores. Montando.');
-        // Limpiar errores al montar si vienes de otra página que pudo dejar un error
         if (error) {
             clearError();
         }
-        return () => { // Limpiar errores al desmontar
-            // console.log('[Register.jsx] useEffect limpieza errores. Desmontando.');
+        return () => { 
             clearError();
         };
     }, [clearError, error]); // <- Añadido error a las dependencias por la limpieza en montaje
@@ -59,25 +52,18 @@ const Register = () => {
     };
 
     const handleLogoutAndClearForm = () => {
-        // console.log('[Register.jsx] handleLogoutAndClearForm llamado.');
         logoutUser();
         setFormData({
             nombre_completo: '', correo: '', contrasenia: '', confirmarContrasenia: '',
             rol: 'estudiante', carrera: '', semestre: '', telefono: ''
         });
-        // clearError(); // clearError se llamará por el useEffect al cambiar isAuthenticated o al desmontar
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // clearError(); // Se limpiará al inicio del efecto si hay error
 
         if (formData.contrasenia !== formData.confirmarContrasenia) {
-            // En lugar de usar useAuthStore.setState directamente, es mejor tener una acción en el store si fuera un error global
-            // o manejarlo como un error local si es solo de UI.
-            // Por ahora, para simplificar, podemos mostrar un error local o usar el global si lo ajustamos.
-            // Vamos a dejar que el store maneje el error si el backend lo devuelve por esto.
-            // O, si queremos un error de UI inmediato:
+            
             useAuthStore.setState({ error: 'Las contraseñas no coinciden.' }); // Temporal, idealmente manejar errores de UI localmente o con una acción específica
             return;
         }
@@ -92,15 +78,12 @@ const Register = () => {
             await registerUser(finalUserData);
             setRegistrationSuccess(true);
         } catch (err) {
-            // console.error("Fallo en el intento de registro:", err.mensaje || err);
             setRegistrationSuccess(false);
         }
     };
     
-    // console.log(`Renderizando Register. isAuthenticated: ${isAuthenticated}, registrationSuccess: ${registrationSuccess}`);
 
     if (isAuthenticated && !registrationSuccess) {
-        // console.log('[Register.jsx] Renderizando mensaje de sesión activa.');
         return (
             <>
                 <Navbar />
@@ -125,7 +108,6 @@ const Register = () => {
         );
     }
 
-    // console.log('[Register.jsx] Renderizando formulario de registro.');
     return (
         <>
             <Navbar />

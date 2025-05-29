@@ -1,26 +1,22 @@
-// Ruta: frontend/src/components/Recursos.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 import useAuthStore from '../store/authStore';
 import recursoService from '../services/recursoService';
 import materiaService from '../services/materiaService';
-// Asegúrate de que la ruta a tu Navbar sea correcta si decides usar uno específico aquí
-// import Navbar from '../components/Home/NavBarHome.jsx'; 
-import '../styles/Recursos.css'; // Asegúrate que este archivo CSS exista
+import '../styles/Recursos.css'; 
 
 const Recursos = () => {
-    // Seleccionar estado individualmente desde Zustand
     const isAuthenticated = useAuthStore(state => state.isAuthenticated);
-    const user = useAuthStore(state => state.user); // Obtenemos el objeto user completo
+    const user = useAuthStore(state => state.user); 
     const userRol = useAuthStore(state => state.user?.rol); // Específicamente el rol para lógica
 
     const [titulo, setTitulo] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [enlaceUrl, setEnlaceUrl] = useState('');
-    const [tipoRecursoForm, setTipoRecursoForm] = useState('documento_pdf'); // Estado para el tipo en el formulario
+    const [tipoRecursoForm, setTipoRecursoForm] = useState('documento_pdf'); 
     const [archivo, setArchivo] = useState(null);
     const [materiaId, setMateriaId] = useState('');
 
-    const [recursosList, setRecursosList] = useState([]); // Cambiado de misRecursos para evitar confusión
+    const [recursosList, setRecursosList] = useState([]); 
     const [materias, setMaterias] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -29,12 +25,11 @@ const Recursos = () => {
     const esAsesor = isAuthenticated && userRol === 'asesor';
 
     const cargarRecursos = useCallback(async () => {
-        // No establecer isLoading aquí directamente para permitir cargas separadas si es necesario
         try {
             let data;
-            if (esAsesor) { // Si es asesor, podría tener una vista de "mis recursos" + públicos
-                data = await recursoService.obtenerMisRecursos(); // O una combinación
-            } else { // Para otros usuarios (estudiantes, no logueados), mostrar solo públicos
+            if (esAsesor) { 
+                data = await recursoService.obtenerMisRecursos(); 
+            } else { 
                 data = await recursoService.obtenerRecursosPublicos();
             }
             setRecursosList((data || []).sort((a,b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion)));
@@ -42,7 +37,7 @@ const Recursos = () => {
             setError(err.mensaje || `Error al cargar recursos.`);
             setRecursosList([]);
         }
-    }, [esAsesor]); // Depende de si es asesor para decidir qué cargar
+    }, [esAsesor]); 
 
     useEffect(() => {
         const cargarDataInicial = async () => {
@@ -64,7 +59,7 @@ const Recursos = () => {
             setIsLoading(false);
         };
         cargarDataInicial();
-    }, [esAsesor, cargarRecursos]); // Depende de esAsesor y la función memoizada cargarRecursos
+    }, [esAsesor, cargarRecursos]); 
 
     const handleFileChange = (e) => {
         setArchivo(e.target.files[0]);
@@ -146,9 +141,7 @@ const Recursos = () => {
     };
 
     return (
-        <div className="recursos-container"> {/* Estilos aplicados desde Recursos.css */}
-            {/* Navbar podría ser el del Dashboard o uno específico si esta página es independiente */}
-            {/* <Navbar /> */} 
+        <div className="recursos-container"> 
             <h1>Recursos Compartidos</h1>
 
             {error && <p className="error-message">{error}</p>}
@@ -212,7 +205,6 @@ const Recursos = () => {
             <div className="lista-recursos">
                 {recursosList.map(recurso => (
                     <div key={recurso.id} className="recurso-card">
-                        {/* Aquí 'recurso.tipo_recurso' es la propiedad del objeto 'recurso' */}
                         <h3>{obtenerIconoRecurso(recurso.tipo_recurso)} {recurso.titulo}</h3>
                         {recurso.nombre_materia && <p><small>Materia: {recurso.nombre_materia}</small></p>}
                         <p>{recurso.descripcion || 'Sin descripción.'}</p>
