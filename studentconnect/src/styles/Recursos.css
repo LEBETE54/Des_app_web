@@ -1,0 +1,146 @@
+/* Ruta: frontend/src/styles/Recursos.css */
+.recursos-container {
+    font-family: Arial, sans-serif;
+}
+
+.recursos-container h1, .recursos-container h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.recursos-container h2 {
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+.recurso-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.recurso-form div {
+    margin-bottom: 15px;
+}
+
+.recurso-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.recurso-form input[type="text"],
+.recurso-form input[type="url"],
+.recurso-form input[type="file"],
+.recurso-form textarea,
+.recurso-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.recurso-form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.recurso-form button[type="submit"] {
+    background-color: #28a745; /* Verde */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.recurso-form button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.recurso-form button[type="submit"]:disabled {
+    background-color: #ccc;
+}
+
+.lista-recursos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.recurso-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.recurso-card h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.recurso-card p {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 10px;
+    flex-grow: 1;
+}
+.recurso-card p small {
+    color: #777;
+    font-size: 0.8em;
+}
+
+.btn-recurso, .btn-eliminar-recurso {
+    display: inline-block;
+    padding: 8px 12px;
+    margin-top: 10px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.btn-recurso:hover {
+    background-color: #0056b3;
+}
+
+.btn-eliminar-recurso {
+    background-color: #dc3545;
+}
+.btn-eliminar-recurso:hover {
+    background-color: #c82333;
+}
+
+.error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.success-message {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}

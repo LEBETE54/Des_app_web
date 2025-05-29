@@ -1,0 +1,30 @@
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 60px;
+    height: 0;
+    width: 250px;
+    background-color: rgba(133, 131, 131, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown_menu.open {
+    height: 240px;
+}
+
+.dropdown_menu li {
+    padding: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown_menu .action_btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

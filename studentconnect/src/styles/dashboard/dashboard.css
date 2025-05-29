@@ -1,0 +1,40 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #faf9f9;
+}
+
+.dashboard-navbar {
+  height: 120px;
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  z-index: 10;
+  width: 100%;
+  margin: 0 ;
+
+}
+
+.dashboard-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar ya estaba bien */
+.sidebar {
+  width: 220px;
+  background-color: #ffffff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+  padding: 2rem 1rem;
+}
+
+/* Área principal para el contenido */
+.main-section {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background-color: #faf9f9;
+  box-sizing: border-box;
+  height: calc(100vh - 80px); /* 100% alto menos el navbar */
+}

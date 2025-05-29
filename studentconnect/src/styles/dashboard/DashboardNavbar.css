@@ -1,0 +1,146 @@
+/* Ruta: frontend/src/styles/dashboard/DashboardNavbar.css */
+
+.dashboard-navbar-header {
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 0 25px; /* Relleno horizontal */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    height: 65px; /* Altura fija */
+    display: flex;
+    align-items: center;
+    position: sticky; /* Para que se quede fijo arriba si el contenido hace scroll */
+    top: 0;
+    z-index: 1000; /* Para que esté por encima de otros elementos */
+}
+
+.navbar-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333; /* Color de texto oscuro */
+}
+
+.navbar-logo {
+    height: 35px; /* Tamaño del logo */
+    margin-right: 12px;
+}
+
+.navbar-title {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #001871; /* Azul oscuro corporativo */
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.user-menu {
+    position: relative; /* Para el posicionamiento del dropdown */
+}
+
+.user-menu-button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px; /* Botón más redondeado */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.user-menu-button:hover {
+    background-color: #f0f0f0; /* Un gris claro al pasar el mouse */
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%; /* Avatar circular */
+    margin-right: 10px;
+    object-fit: cover; /* Para que la imagen no se distorsione */
+    border: 1px solid #ddd;
+}
+
+.user-name {
+    font-weight: 500;
+    color: #333;
+    margin-right: 5px;
+}
+
+.dropdown-arrow {
+    width: 18px;
+    height: 18px;
+    color: #555;
+    transition: transform 0.2s ease;
+}
+
+.dropdown-arrow.open {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    position: absolute;
+    top: calc(100% + 10px); /* Un poco debajo del botón */
+    right: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+    width: 200px; /* Ancho del dropdown */
+    z-index: 1010;
+    border: 1px solid #eee;
+}
+
+.dropdown-content li a,
+.dropdown-content li .logout-button {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.95em;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.dropdown-content li a:hover,
+.dropdown-content li .logout-button:hover {
+    background-color: #f5f5f5; /* Un gris muy claro al pasar el mouse */
+}
+
+.logout-button {
+    color: #dc3545 !important; /* Rojo para cerrar sesión */
+    font-weight: 500;
+}
+
+.navbar-login-button {
+    padding: 8px 18px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.navbar-login-button:hover {
+    background-color: #0056b3;
+}
