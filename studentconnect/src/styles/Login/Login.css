@@ -1,0 +1,69 @@
+.main1 {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: #faf9f9;
+}
+
+form.desc {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form.desc h1 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #04195e;
+}
+
+form.desc input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+}
+
+form.desc button {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #04195e;
+    color: white;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+form.desc button:hover {
+    background-color: #1F3A93;
+    transform: scale(1.05);
+}
+
+/* Diseño responsivo */
+@media (max-width: 500px) {
+    form.desc {
+        padding: 1.5rem;
+    }
+
+    form.desc h1 {
+        font-size: 1.5rem;
+    }
+
+    form.desc input,
+    form.desc button {
+        font-size: 0.9rem;
+    }
+}

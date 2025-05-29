@@ -1,0 +1,28 @@
+/* dashboard.css (sidebar unificado) */
+.sidebar {
+  background-color: #ffffff;
+  width: 220px;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 80px); /* ajustado por NavBar */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.8rem 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar li:hover {
+  background-color: #04195e;
+  color: white;
+}

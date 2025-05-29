@@ -1,0 +1,48 @@
+main1 {
+    justify-content: space-evenly;
+}
+
+.desc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    padding: 1rem;
+}
+
+.desc h1, .desc p {
+    color: #000000;
+}
+
+
+.main1 h1, p, a {
+    max-width: 510px;
+}
+
+.main1 h1, p {
+    margin: 0.5rem;
+    padding: 1rem;
+}
+
+.main1 h1 {
+    margin: 0;
+}
+
+.main1 a {
+    margin-top: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.main1 img {
+    width: 80%;
+    height: auto;
+}

@@ -1,0 +1,86 @@
+.crear-container {
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px #00000014;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.crear-container h3 {
+  margin-top: 2rem;
+  font-size: 1.4rem;
+  color: #04195e;
+}
+
+.crear-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.crear-container input,
+.crear-container textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.crear-container textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.crear-container ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.crear-container li {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.crear-container li strong {
+  color: #04195e;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Botones */
+.crear-container button {
+  background-color: #04195e;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+button {
+  padding: 0.5rem 1rem;
+  margin: 0.3rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
