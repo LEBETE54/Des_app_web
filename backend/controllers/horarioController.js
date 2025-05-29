@@ -1,4 +1,3 @@
-// Ruta: backend/controllers/horarioController.js
 const HorarioDisponible = require('../models/horarioDisponibleModel'); // Modelo corregido
 
 exports.crearHorario = async (req, res) => {
@@ -14,24 +13,22 @@ exports.crearHorario = async (req, res) => {
         titulo_asesoria, 
         descripcion_asesoria, 
         materia_id,
-        fecha,             // Este es fechaInicioInput del frontend
-        hora_inicio,       // Este es horaInicioInput del frontend
-        fechaFin,          // Este es fechaFinInput del frontend
-        hora_fin_form,     // Este es horaFinInput del frontend
+        fecha,             
+        hora_inicio,       
+        fechaFin,          
+        hora_fin_form,     
         modalidad, 
         enlace_o_lugar, 
         max_estudiantes_simultaneos, 
-        notas_adicionales  // Este es notasAdicionalesForm del frontend
+        notas_adicionales  
     } = req.body;
 
-    // Validar los campos que vienen del frontend
     if (!titulo_asesoria || !fecha || !hora_inicio || !fechaFin || !hora_fin_form) {
         return res.status(400).json({ 
             mensaje: 'Error: Faltan campos requeridos. Asegúrate de enviar: título, fecha de inicio, hora de inicio, fecha de fin y hora de fin.' 
         });
     }
 
-    // Construir los strings DATETIME para la BD, MySQL los parseará.
     const fecha_hora_inicio_str = `${fecha} ${hora_inicio}:00`; 
     const fecha_hora_fin_str = `${fechaFin} ${hora_fin_form}:00`;
 
@@ -44,8 +41,8 @@ exports.crearHorario = async (req, res) => {
         titulo_asesoria,
         descripcion_asesoria: descripcion_asesoria || null,
         materia_id: materia_id ? parseInt(materia_id) : null,
-        fecha_hora_inicio: fecha_hora_inicio_str, // Campo para la BD (DATETIME)
-        fecha_hora_fin: fecha_hora_fin_str,       // Campo para la BD (DATETIME)
+        fecha_hora_inicio: fecha_hora_inicio_str, 
+        fecha_hora_fin: fecha_hora_fin_str,       
         modalidad: modalidad || 'virtual',
         enlace_o_lugar: enlace_o_lugar || null,
         estado_disponibilidad: 'disponible', 
@@ -76,7 +73,6 @@ exports.obtenerMisHorarios = (req, res) => {
     if (!req.usuario || req.usuario.rol !== 'asesor') {
         return res.status(403).json({ mensaje: 'Acceso denegado. Solo para asesores.' });
     }
-    // Esta función ahora usará el modelo corregido que ordena por fecha_hora_inicio
     HorarioDisponible.findByAsesorId(req.usuario.id, (error, horarios) => {
         if (error) {
             console.error("Error al obtener horarios del asesor:", error);
@@ -88,7 +84,6 @@ exports.obtenerMisHorarios = (req, res) => {
 
 exports.listarHorariosDisponiblesParaEstudiantes = (req, res) => {
     const filtros = req.query; 
-    // Esta función usa el modelo corregido que usa fecha_hora_fin y fecha_hora_inicio
     HorarioDisponible.findDisponiblesParaReserva(filtros, (error, horarios) => {
         if (error) {
             console.error("Error al obtener horarios disponibles para estudiantes:", error);
@@ -98,8 +93,7 @@ exports.listarHorariosDisponiblesParaEstudiantes = (req, res) => {
     });
 };
 
-// (Asegúrate que las funciones obtenerHorarioPorId, actualizarHorario, eliminarHorario también sean consistentes
-//  con los campos de la tabla y los parámetros que reciben)
+
 exports.obtenerHorarioPorId = (req, res) => {
     HorarioDisponible.findById(req.params.id, (error, horario) => {
         if (error) { return res.status(500).json({ mensaje: 'Error al obtener el horario.', detalle: error.message });}
@@ -114,12 +108,9 @@ exports.actualizarHorario = (req, res) => {
     }
     const horarioId = req.params.id;
     const asesorId = req.usuario.id;
-    const dataToUpdate = req.body; // El frontend debería enviar fecha_hora_inicio y fecha_hora_fin si se actualizan
-                                  // o los campos separados para que este controlador los combine.
-                                  // Por consistencia, si el form de edición tiene campos separados,
-                                  // aquí también se deberían combinar.
+    const dataToUpdate = req.body; 
+                                  
     
-    // Ejemplo si el frontend envía campos separados para actualizar:
     if (dataToUpdate.fecha && dataToUpdate.hora_inicio) {
         dataToUpdate.fecha_hora_inicio = `${dataToUpdate.fecha} ${dataToUpdate.hora_inicio}:00`;
         delete dataToUpdate.fecha;

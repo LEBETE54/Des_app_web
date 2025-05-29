@@ -1,17 +1,13 @@
-// Ruta: backend/models/horarioDisponibleModel.js
 const db = require('../config/db'); 
 
 const HorarioDisponible = {
     create: (data, callback) => {
-        // Data esperada del controller: asesor_usuario_id, titulo_asesoria, materia_id, 
-        // fecha_hora_inicio (YYYY-MM-DD HH:MM:SS), fecha_hora_fin (YYYY-MM-DD HH:MM:SS), 
-        // ... y los demás campos de tu tabla horarios_disponibles_asesor
+       
         const query = 'INSERT INTO horarios_disponibles_asesor SET ?';
         db.query(query, data, callback);
     },
 
     findByAsesorId: (asesorUsuarioId, callback) => {
-        // CORREGIDO: Ordenar por fecha_hora_inicio
         const query = `
             SELECT 
                 hda.*,  /* Selecciona todas las columnas de horarios_disponibles_asesor */
@@ -25,7 +21,6 @@ const HorarioDisponible = {
     },
 
     findById: (id, callback) => {
-        // Asegúrate que todos los campos seleccionados de hda.* existan en tu tabla
         const query = `
             SELECT 
                 hda.*, 
@@ -52,7 +47,6 @@ const HorarioDisponible = {
     },
 
     findDisponiblesParaReserva: (filtros, callback) => {
-        // CORREGIDO: Usar fecha_hora_fin y fecha_hora_inicio
         let query = `
             SELECT 
                 hda.id, hda.titulo_asesoria, hda.descripcion_asesoria, 

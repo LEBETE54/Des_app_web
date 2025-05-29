@@ -1,10 +1,6 @@
-// Ruta: backend/controllers/materiaController.js
 const Materia = require('../models/materiaModel'); // Importa el modelo
 
-/**
- * Controlador para listar todas las materias.
- * Usado principalmente para poblar dropdowns en el frontend.
- */
+
 exports.listarTodasLasMaterias = (req, res) => {
     Materia.getAll((error, materias) => {
         if (error) {
@@ -18,15 +14,8 @@ exports.listarTodasLasMaterias = (req, res) => {
     });
 };
 
-/**
- * Controlador para crear una nueva materia.
- * (Opcional - Podría ser solo para administradores)
- */
+
 exports.crearMateria = (req, res) => {
-    // Aquí deberías añadir validación del rol del usuario (si es solo para admin)
-    // if (req.usuario.rol !== 'admin') {
-    //     return res.status(403).json({ mensaje: 'Acceso denegado. Solo administradores pueden crear materias.' });
-    // }
 
     const { nombre, descripcion, area_conocimiento_padre } = req.body;
 
@@ -49,9 +38,3 @@ exports.crearMateria = (req, res) => {
     });
 };
 
-// Puedes añadir más controladores para obtener por ID, actualizar y eliminar materias
-// si necesitas una gestión completa de materias desde el API (probablemente para un panel de admin).
-// exports.obtenerMateriaPorId = (req, res) => { ... };
-// exports.actualizarMateria = (req, res) => { ... };
-// exports.eliminarMateria = (req, res) => { ... };
-    

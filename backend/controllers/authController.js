@@ -1,7 +1,7 @@
-const db = require('../config/db'); // Asegúrate que la ruta a tu config de BD sea correcta
+const db = require('../config/db'); 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-require('dotenv').config(); // Para las variables de entorno como JWT_SECRET
+require('dotenv').config(); 
 
 // Registrar un nuevo usuario
 exports.register = async (req, res) => {
@@ -12,41 +12,35 @@ exports.register = async (req, res) => {
         return res.status(400).json({ mensaje: 'Nombre completo, correo y contraseña son requeridos.' });
     }
 
-    // Validar el rol (opcional, podría tener un default en BD también)
     const rolesPermitidos = ['estudiante', 'asesor', 'admin'];
     if (rol && !rolesPermitidos.includes(rol)) {
         return res.status(400).json({ mensaje: 'El rol proporcionado no es válido.' });
     }
 
     try {
-        // 1. Verificar si el correo ya existe
         const [usuariosExistentes] = await db.promise().query('SELECT correo FROM usuarios WHERE correo = ?', [correo]);
 
         if (usuariosExistentes.length > 0) {
             return res.status(409).json({ mensaje: 'El correo electrónico ya está registrado.' });
         }
 
-        // 2. Hashear la contraseña
         const salt = await bcrypt.genSalt(10);
         const contraseniaHasheada = await bcrypt.hash(contrasenia, salt);
 
-        // 3. Crear el nuevo usuario
         const nuevoUsuario = {
             nombre_completo,
             correo,
             contrasenia: contraseniaHasheada,
-            rol: rol || 'estudiante', // Rol por defecto 'estudiante' si no se proporciona
+            rol: rol || 'estudiante', 
             carrera: carrera || null,
             semestre: semestre || null,
             telefono: telefono || null,
-            activo: true, // Por defecto activo
-            // fecha_registro se inserta por defecto por la BD
+            activo: true, 
         };
 
         const [resultado] = await db.promise().query('INSERT INTO usuarios SET ?', nuevoUsuario);
         const nuevoUsuarioId = resultado.insertId;
 
-        // 4. Generar un token JWT
         const payload = {
             usuario: {
                 id: nuevoUsuarioId,
@@ -58,7 +52,7 @@ exports.register = async (req, res) => {
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            { expiresIn: '7d' }, // El token expira en 7 días (puedes ajustarlo)
+            { expiresIn: '7d' }, 
             (error, token) => {
                 if (error) throw error;
                 res.status(201).json({
@@ -89,7 +83,6 @@ exports.login = async (req, res) => {
     }
 
     try {
-        // 1. Verificar si el usuario existe y está activo
         const [usuarios] = await db.promise().query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
 
         if (usuarios.length === 0) {
@@ -102,14 +95,12 @@ exports.login = async (req, res) => {
             return res.status(403).json({ mensaje: 'Esta cuenta ha sido desactivada. Contacta al administrador.' });
         }
 
-        // 2. Comparar la contraseña
         const esMatch = await bcrypt.compare(contrasenia, usuario.contrasenia);
 
         if (!esMatch) {
             return res.status(400).json({ mensaje: 'Credenciales inválidas (contraseña incorrecta).' });
         }
 
-        // 3. Generar un token JWT
         const payload = {
             usuario: {
                 id: usuario.id,
@@ -132,7 +123,7 @@ exports.login = async (req, res) => {
                         nombre_completo: usuario.nombre_completo,
                         correo: usuario.correo,
                         rol: usuario.rol,
-                        // puedes añadir más campos si los necesitas en el frontend al loguear
+                      
                     }
                 });
             }
