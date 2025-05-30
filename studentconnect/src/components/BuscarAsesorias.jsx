@@ -6,7 +6,9 @@ import materiaService from '../services/materiaService';
 import reservaService from '../services/reservaService';
 import { useNavigate } from 'react-router-dom'; // Para redirigir si no está logueado para reservar
 
-const AsesoriaCard = ({ asesoria, onReservarClick, isAuthenticated }) => {
+
+const AsesoriaCard = ({ asesoria, onReservarClick, isAuthenticated, user }) => {
+
 
 
     return (
@@ -18,25 +20,20 @@ const AsesoriaCard = ({ asesoria, onReservarClick, isAuthenticated }) => {
             <p><strong>Horario:</strong> 
             {new Date(asesoria.fecha_hora_inicio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - 
             {new Date(asesoria.fecha_hora_fin).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-
             <p><strong>Modalidad:</strong> <span style={{textTransform: 'capitalize'}}>{asesoria.modalidad}</span></p>
             {asesoria.enlace_o_lugar && asesoria.modalidad === 'presencial' && <p><strong>Lugar:</strong> {asesoria.enlace_o_lugar}</p>}
             {asesoria.asesor_descripcion_corta && <p><small><em>"{asesoria.asesor_descripcion_corta}"</em></small></p>}
-            {asesoria.asesor_tarifa && <p><strong>Tarifa:</strong> {asesoria.asesor_tarifa}</p>}
-            
-            {isAuthenticated && (
-                <button 
-                    onClick={() => onReservarClick(asesoria.id)} 
-                    style={{marginTop: '10px', padding: '8px 12px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer'}}
-                >
-                    Reservar Asesoría
-                </button>
-            )}
+            {isAuthenticated && user?.id !== asesoria.asesor_usuario_id && (
+            <button onClick={() => onReservarClick(asesoria.id)}>
+            Reservar asesoría
+            </button>
+        )}
+
             {!isAuthenticated && (
                  <p style={{marginTop: '10px'}}><small><em>Inicia sesión para reservar.</em></small></p>
             )}
-        </div>
-    );
+    </div>
+            );
 };
 
 
@@ -105,13 +102,21 @@ const BuscarAsesorias = () => {
 
    const user = useAuthStore(state => state.user); 
 
-const handleReservarClick = async (horarioId) => {
+   const handleReservarClick = async (horarioId) => {
   if (!isAuthenticated || !user) {
     alert("Debes iniciar sesión para reservar.");
     return navigate('/login');
   }
 
   try {
+    const reservas = await reservaService.obtenerReservasPorEstudiante(user.id);
+    const yaReservada = reservas.some(r => r.horario_disponibilidad_id === horarioId);
+
+    if (yaReservada) {
+      alert("Ya estás inscrito a esta asesoría.");
+      return;
+    }
+
     await reservaService.reservarAsesoria(horarioId, user.id);
     alert("¡Te has inscrito exitosamente a la asesoría!");
     fetchAndFilterAsesorias(); 
@@ -168,7 +173,12 @@ const handleReservarClick = async (horarioId) => {
 
             <div className="lista-asesorias">
                 {asesoriasMostradas.map(asesoria => (
-                    <AsesoriaCard key={asesoria.id} asesoria={asesoria} onReservarClick={handleReservarClick} isAuthenticated={isAuthenticated} />
+                   <AsesoriaCard 
+                    key={asesoria.id} 
+                    asesoria={asesoria} 
+                    onReservarClick={handleReservarClick} 
+                    isAuthenticated={isAuthenticated}
+                    user={user}/>
                 ))}
             </div>
         </div>

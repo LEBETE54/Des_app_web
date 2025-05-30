@@ -8,7 +8,7 @@ router.post('/', (req, res) => {
 
   const sql = `
     INSERT INTO reservas_estudiantes 
-    (horario_disponibilidad_id, estudiante_usuario_id, estado_reserva) 
+    (horario_disponibilidad_id, usuario_id, estado_reserva)
     VALUES (?, ?, 'confirmada')
   `;
 
@@ -26,6 +26,7 @@ router.get('/por-estudiante/:id', (req, res) => {
     SELECT 
       r.id AS reserva_id,
       r.estado_reserva,
+      r.horario_disponibilidad_id,
       h.titulo_asesoria,
       h.fecha_hora_inicio,
       h.fecha_hora_fin,
@@ -34,7 +35,7 @@ router.get('/por-estudiante/:id', (req, res) => {
     FROM reservas_estudiantes r
     JOIN horarios_disponibles_asesor h ON r.horario_disponibilidad_id = h.id
     JOIN usuarios u ON h.asesor_usuario_id = u.id
-    WHERE r.estudiante_usuario_id = ?
+    WHERE r.usuario_id = ?
   `;
 
   db.query(query, [estudianteId], (err, results) => {

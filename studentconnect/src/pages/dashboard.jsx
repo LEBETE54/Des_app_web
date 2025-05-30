@@ -60,7 +60,8 @@ const AsesoriasInscritas = () => {
 
 const Dashboard = () => {
   const userRol = useAuthStore(state => state.user?.rol);
-  const [seccionActiva, setSeccionActiva] = useState(userRol === 'asesor' ? 'crear' : 'buscar');
+  const [seccionActiva, setSeccionActiva] = useState('buscar');
+
   
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
   const user = useAuthStore(state => state.user);
@@ -84,9 +85,9 @@ const Dashboard = () => {
       case 'recursos':
         return <Recursos />;
       case 'crear':
-        return userRol === 'asesor' ? <GestionarHorarios /> : <p>Acceso denegado.</p>;
+        return <GestionarHorarios />;
       case 'inscritas':
-        return userRol === 'estudiante' ? <AsesoriasInscritas /> : <p>Acceso denegado.</p>;
+        return <AsesoriasInscritas />;
       default:
         return userRol === 'asesor' ? <GestionarHorarios /> : <BuscarAsesorias />;
     }
@@ -104,7 +105,6 @@ const Dashboard = () => {
       <div className="dashboard-content">
         <Sidebar 
           onSelect={setSeccionActiva} 
-          usuarioRol={userRol}
           seccionActual={seccionActiva}
         />
         <div className="main-section">

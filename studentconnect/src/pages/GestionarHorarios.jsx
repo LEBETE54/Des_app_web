@@ -31,15 +31,13 @@ const GestionarHorarios = () => {
     const [enlaceOLugar, setEnlaceOLugar] = useState('');
     const [maxEstudiantes, setMaxEstudiantes] = useState(1);
     const [notasAdicionales, setNotasAdicionales] = useState('');
-
     const [misPeriodos, setMisPeriodos] = useState([]);
     const [materias, setMaterias] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
-
     const cargarMisPeriodos = useCallback(async () => {
-        if (isAuthenticated && userRol === 'asesor') {
+        if (isAuthenticated) {
             setIsLoading(true); setError('');
             try {
                 const data = await horarioService.obtenerMisHorarios();
@@ -53,7 +51,7 @@ const GestionarHorarios = () => {
     }, [isAuthenticated, userRol]);
 
     useEffect(() => {
-        if (!isAuthenticated || userRol !== 'asesor') {
+        if (!isAuthenticated) {
             navigate('/login', {replace: true});
             return;
         }
@@ -138,23 +136,14 @@ const GestionarHorarios = () => {
         setIsLoading(false);
     };
     
-    const formatearFechaHoraParaMostrar = (dateTimeString) => {
-        if (!dateTimeString) return 'N/A';
-        try {
-            return new Date(dateTimeString).toLocaleString('es-MX', {
-                year: 'numeric', month: 'long', day: 'numeric',
-                hour: '2-digit', minute: '2-digit', hour12: true
-            });
-        } catch (e) { return 'Fecha inválida'; }
-    };
 
-    if (!isAuthenticated || userRol !== 'asesor') { 
+    if (!isAuthenticated) { 
         return (
             <>
                 <Navbar />
                 <div className="acceso-denegado-container">
                     <h1>Acceso Denegado</h1>
-                    <p>Debes ser un asesor e iniciar sesión para acceder a esta página.</p>
+                    <p>Debes iniciar sesión para acceder a esta página.</p>
                     <Link to="/login">Ir a Iniciar Sesión</Link>
                 </div>
             </>

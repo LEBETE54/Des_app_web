@@ -61,7 +61,7 @@ const NavBar = () => {
                                     src={profileImageUrl} 
                                     alt={user.nombre_completo || user.correo} 
                                     className="user-avatar" 
-                                    onError={(e) => { e.target.onerror = null; e.target.src='/default-avatar.png'; }} // Fallback si la imagen falla
+                                    onError={(e) => { e.target.onerror = null; e.target.src='/default.png'; }} // Fallback si la imagen falla
                                 />
                                 <span className="user-name">{user.nombre_completo || user.correo}</span>
                                 <svg className={`dropdown-arrow ${dropdownOpen ? 'open' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">

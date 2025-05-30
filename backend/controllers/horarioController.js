@@ -73,7 +73,7 @@ exports.crearHorario = async (req, res) => {
 };
 
 exports.obtenerMisHorarios = (req, res) => {
-    if (!req.usuario || req.usuario.rol !== 'asesor') {
+    if (!req.usuario) {
         return res.status(403).json({ mensaje: 'Acceso denegado. Solo para asesores.' });
     }
     // Esta función ahora usará el modelo corregido que ordena por fecha_hora_inicio
@@ -106,7 +106,7 @@ exports.obtenerHorarioPorId = (req, res) => {
 };
 
 exports.actualizarHorario = (req, res) => {
-    if (!req.usuario || req.usuario.rol !== 'asesor') {
+    if (!req.usuario) {
         return res.status(403).json({ mensaje: 'Acceso denegado.' });
     }
     const horarioId = req.params.id;
@@ -134,7 +134,7 @@ exports.actualizarHorario = (req, res) => {
 };
 
 exports.eliminarHorario = (req, res) => {
-     if (!req.usuario || req.usuario.rol !== 'asesor') {
+     if (!req.usuario) {
         return res.status(403).json({ mensaje: 'Acceso denegado.' });
     }
     const horarioId = req.params.id;
