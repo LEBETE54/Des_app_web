@@ -12,14 +12,8 @@ const authMiddleware = require('../middleware/authMiddleware'); // Middleware pa
 router.get('/', authMiddleware, materiaController.listarTodasLasMaterias);
 
 // POST /api/materias - Crear una nueva materia (Ejemplo para Admin)
-// Esta ruta debería estar protegida y solo accesible para administradores.
-// Necesitarías añadir una verificación de rol dentro del controlador o un middleware de rol.
-// router.post('/', authMiddleware, /* middlewareRolAdmin, */ materiaController.crearMateria);
 
-// (Otras rutas para GET por ID, PUT, DELETE si las implementas)
-// router.get('/:id', authMiddleware, materiaController.obtenerMateriaPorId);
-// router.put('/:id', authMiddleware, /* middlewareRolAdmin, */ materiaController.actualizarMateria);
-// router.delete('/:id', authMiddleware, /* middlewareRolAdmin, */ materiaController.eliminarMateria);
+
 
 module.exports = router;
     

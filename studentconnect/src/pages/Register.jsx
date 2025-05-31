@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from "../components/Home/NavBarHome.jsx";
 import useAuthStore from '../store/authStore';
-// Ya no necesitas shallow si seleccionas individualmente
 import '../styles/Login/Login.css';
 
 const Register = () => {

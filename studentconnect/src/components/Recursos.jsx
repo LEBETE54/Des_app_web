@@ -1,11 +1,8 @@
-// Ruta: frontend/src/components/Recursos.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 import useAuthStore from '../store/authStore';
 import recursoService from '../services/recursoService';
 import materiaService from '../services/materiaService';
-// Asegúrate de que la ruta a tu Navbar sea correcta si decides usar uno específico aquí
-// import Navbar from '../components/Home/NavBarHome.jsx'; 
-import '../styles/Recursos.css'; // Asegúrate que este archivo CSS exista
+import '../styles/Recursos.css'; 
 
 const Recursos = () => {
     // Seleccionar estado individualmente desde Zustand

@@ -1,4 +1,3 @@
-// Ruta: backend/models/horarioDisponibleModel.js
 const db = require('../config/db'); 
 
 const HorarioDisponible = {

@@ -1,4 +1,3 @@
-// Ruta: backend/models/recursoModel.js
 const db = require('../config/db');
 
 const Recurso = {

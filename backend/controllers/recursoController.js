@@ -2,7 +2,6 @@
 const Recurso = require('../models/recursoModel');
 const path = require('path'); // Módulo de Node para trabajar con rutas de archivos
 
-// No necesitamos multer aquí directamente si se configura en las rutas
 
 exports.crearRecurso = async (req, res) => {
     if (!req.usuario || req.usuario.rol !== 'asesor') {
@@ -20,13 +19,9 @@ exports.crearRecurso = async (req, res) => {
 
     // req.file es añadido por multer si se sube un archivo con el nombre 'archivoRecurso'
     if (req.file) {
-        // Guardamos la ruta relativa para acceder al archivo desde el frontend/API
-        // Ej: /uploads/recursos/nombrearchivo123.pdf
+
         archivo_adjunto_url = `/uploads/recursos/${req.file.filename}`;
     } else if (tipo_recurso === 'documento_pdf' || tipo_recurso === 'imagen') {
-        // Si el tipo es PDF o imagen pero no se subió archivo, podría ser un error
-        // o podrías permitirlo si el enlace_url apunta a un PDF/imagen externo.
-        // Por ahora, si es PDF/imagen y no hay archivo, y no hay enlace_url, es un problema.
         if (!enlace_url) {
              // return res.status(400).json({ mensaje: 'Para tipo PDF o Imagen, se requiere un archivo o un enlace.' });
              // Decidimos permitir PDF/Imagen sin archivo si hay enlace_url

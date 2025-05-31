@@ -20,7 +20,6 @@ exports.listarTodasLasMaterias = (req, res) => {
 
 /**
  * Controlador para crear una nueva materia.
- * (Opcional - Podría ser solo para administradores)
  */
 exports.crearMateria = (req, res) => {
     // Aquí deberías añadir validación del rol del usuario (si es solo para admin)

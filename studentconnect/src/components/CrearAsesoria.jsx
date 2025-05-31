@@ -1,6 +1,3 @@
-// Ruta: frontend/src/components/CrearAsesoria.jsx (o pages/GestionarHorarios.jsx)
-// Asegúrate de que el nombre y la ruta del archivo coincidan con lo que usas.
-
 import React, { useEffect, useState, useCallback } from 'react';
 import useAuthStore from '../store/authStore'; // Ajusta la ruta si es diferente
 // Este servicio debe apuntar al backend que maneja la tabla horarios_disponibles_asesor

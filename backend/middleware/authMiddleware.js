@@ -1,4 +1,3 @@
-// Ruta: backend/middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
 require('dotenv').config(); // Para acceder a process.env.JWT_SECRET
 

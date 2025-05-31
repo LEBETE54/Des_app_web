@@ -75,20 +75,6 @@ const useAuthStore = create((set, get) => ({
         // window.location.href = '/login'; (no siempre es la mejor práctica hacerlo desde el store)
     },
 
-    // (Opcional) Acción para inicializar o verificar el estado de autenticación al cargar la app
-    // Esto ya se hace parcialmente al definir el estado inicial, pero una función explícita puede ser útil
-    // si necesitas re-validar el token con el backend, por ejemplo.
-    // Por ahora, la carga inicial desde localStorage es suficiente.
-    // checkAuthStatus: () => {
-    //   const token = get().token;
-    //   const user = get().user;
-    //   if (token && user) {
-    //     set({ isAuthenticated: true });
-    //     // Aquí podrías añadir una llamada al backend para validar el token si quisieras más seguridad
-    //   } else {
-    //     set({ isAuthenticated: false, user: null, token: null });
-    //   }
-    // }
 
     // Acción para limpiar errores manualmente si es necesario
     clearError: () => {

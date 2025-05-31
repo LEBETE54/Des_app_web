@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from "../components/Home/NavBarHome.jsx"; // Asegúrate que la ruta sea correcta
+import Navbar from "../components/Home/NavBarHome.jsx";
 import useAuthStore from '../store/authStore'; // Importamos nuestro store de Zustand
-import '../styles/Login/Login.css'; // Asegúrate que la ruta a tus estilos sea correcta
+import '../styles/Login/Login.css'; 
 
 const Login = () => {
     const navigate = useNavigate();
