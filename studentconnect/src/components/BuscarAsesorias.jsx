@@ -23,6 +23,7 @@ const AsesoriaCard = ({ asesoria, onReservarClick, isAuthenticated, user }) => {
             <p><strong>Modalidad:</strong> <span style={{textTransform: 'capitalize'}}>{asesoria.modalidad}</span></p>
             {asesoria.enlace_o_lugar && asesoria.modalidad === 'presencial' && <p><strong>Lugar:</strong> {asesoria.enlace_o_lugar}</p>}
             {asesoria.asesor_descripcion_corta && <p><small><em>"{asesoria.asesor_descripcion_corta}"</em></small></p>}
+            
             {isAuthenticated && user?.id !== asesoria.asesor_usuario_id && (
             <button onClick={() => onReservarClick(asesoria.id)}>
             Reservar asesoría
@@ -42,11 +43,23 @@ const BuscarAsesorias = () => {
 
     const navigate = useNavigate();
     const [asesoriasMostradas, setAsesoriasMostradas] = useState([]);
+    const [materias, setMaterias] = useState([]);
     const [filtroMateria, setFiltroMateria] = useState('');
     const [filtroBusquedaTexto, setFiltroBusquedaTexto] = useState('');
     const [pestanaActiva, setPestanaActiva] = useState('enEspera'); // 'enEspera', 'activas', 'terminadas'
+
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+
+    const cargarMaterias = useCallback(async () => {
+        try {
+            const data = await materiaService.obtenerTodasLasMaterias();
+            setMaterias(data || []);
+        } catch (err) {
+            console.error("Error cargando materias para filtro:", err);
+            setError(prev => prev + (prev ? "; " : "") + 'No se pudieron cargar las materias.');
+        }
+    }, []);
 
 
     const fetchAndFilterAsesorias = useCallback(async () => {
@@ -95,7 +108,10 @@ const BuscarAsesorias = () => {
         setIsLoading(false);
     }, [filtroMateria, pestanaActiva, filtroBusquedaTexto]);
 
- 
+    useEffect(() => {
+        cargarMaterias();
+    }, [cargarMaterias]);
+
     useEffect(() => {
         fetchAndFilterAsesorias();
     }, [fetchAndFilterAsesorias]);
@@ -139,8 +155,19 @@ const BuscarAsesorias = () => {
                     onChange={(e) => setFiltroBusquedaTexto(e.target.value)}
                     style={{padding: '10px', flexGrow: 1, borderRadius: '5px', border: '1px solid #ced4da', minWidth: '250px'}}
                 />
-               
+                <select 
+                    value={filtroMateria} 
+                    onChange={(e) => setFiltroMateria(e.target.value)}
+                    style={{padding: '10px', borderRadius: '5px', border: '1px solid #ced4da', minWidth: '200px'}}
+                >
+                    <option value="">Todas las Materias</option>
+                    {materias.map(m => (
+                        <option key={m.id} value={m.id}>{m.nombre}</option>
+                    ))}
+                </select>
+
             </div>
+
 
             <div className="pestañas-asesorias" style={{marginBottom: '20px', display: 'flex', justifyContent:'center', gap: '10px', borderBottom: '1px solid #dee2e6'}}>
                 {['enEspera', 'activas', 'terminadas'].map(pestana => (

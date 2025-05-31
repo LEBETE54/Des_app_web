@@ -3,9 +3,6 @@ const db = require('../config/db');
 
 const HorarioDisponible = {
     create: (data, callback) => {
-        // Data esperada del controller: asesor_usuario_id, titulo_asesoria, materia_id, 
-        // fecha_hora_inicio (YYYY-MM-DD HH:MM:SS), fecha_hora_fin (YYYY-MM-DD HH:MM:SS), 
-        // ... y los demás campos de tu tabla horarios_disponibles_asesor
         const query = 'INSERT INTO horarios_disponibles_asesor SET ?';
         db.query(query, data, callback);
     },
@@ -25,7 +22,6 @@ const HorarioDisponible = {
     },
 
     findById: (id, callback) => {
-        // Asegúrate que todos los campos seleccionados de hda.* existan en tu tabla
         const query = `
             SELECT 
                 hda.*, 
@@ -60,6 +56,7 @@ const HorarioDisponible = {
                 hda.fecha_hora_fin,    /* Usar nombre correcto */
                 hda.modalidad, hda.enlace_o_lugar, hda.notas_adicionales, hda.max_estudiantes_simultaneos,
                 hda.estado_disponibilidad,
+                hda.asesor_usuario_id,  
                 u.id as asesor_id, u.nombre_completo as nombre_asesor, u.correo as correo_asesor, u.foto_perfil_url as foto_asesor,
                 ad.descripcion_corta as asesor_descripcion_corta, ad.tarifa_descripcion as asesor_tarifa,
                 m.nombre as nombre_materia, m.id as materia_id_slot,

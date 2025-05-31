@@ -4,7 +4,7 @@ const HorarioDisponible = require('../models/horarioDisponibleModel'); // Modelo
 exports.crearHorario = async (req, res) => {
     console.log("BACKEND: req.body recibido en crearHorario:", JSON.stringify(req.body, null, 2));
 
-    if (!req.usuario || req.usuario.rol !== 'asesor') {
+    if (!req.usuario) {
         return res.status(403).json({ mensaje: 'Acceso denegado. Solo los asesores pueden crear horarios.' });
     }
 
@@ -73,10 +73,6 @@ exports.crearHorario = async (req, res) => {
 };
 
 exports.obtenerMisHorarios = (req, res) => {
-    if (!req.usuario) {
-        return res.status(403).json({ mensaje: 'Acceso denegado. Solo para asesores.' });
-    }
-    // Esta función ahora usará el modelo corregido que ordena por fecha_hora_inicio
     HorarioDisponible.findByAsesorId(req.usuario.id, (error, horarios) => {
         if (error) {
             console.error("Error al obtener horarios del asesor:", error);
@@ -125,7 +121,6 @@ exports.actualizarHorario = (req, res) => {
     }
 
     delete dataToUpdate.asesor_usuario_id; delete dataToUpdate.id; delete dataToUpdate.fecha_creacion;
-
     HorarioDisponible.update(horarioId, asesorId, dataToUpdate, (error, resultado) => {
         if (error) { return res.status(500).json({ mensaje: 'Error al actualizar el horario.', detalle: error.message });}
         if (resultado.affectedRows === 0) { return res.status(404).json({ mensaje: 'Horario no encontrado, no autorizado o sin cambios.' });}
