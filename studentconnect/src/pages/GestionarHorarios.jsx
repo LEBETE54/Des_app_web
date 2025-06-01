@@ -151,7 +151,6 @@ const GestionarHorarios = () => {
 
     return (
         <>
-            <Navbar />
             <div className="gestionar-horarios-container">
                 <h1>Publicar Periodo de Disponibilidad</h1>
                 {error && <p className="error-message">{error}</p>}
