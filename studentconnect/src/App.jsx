@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import GestionarHorarios from './pages/GestionarHorarios';
 import useAuthStore from './store/authStore';
 import PerfilUsuario from './components/PerfilUsuario';
+import AdministracionAsesorias from './components/AdministracionAsesorias';
 
 // Componente para proteger rutas
 const ProtectedRoute = ({ children, rolesPermitidos }) => {
@@ -56,8 +57,8 @@ function App() {
         <Route 
             path="/gestionar-horarios" 
             element={
-                <ProtectedRoute rolesPermitidos={['asesor']}> {/* Solo para usuarios con rol 'asesor' */}
-                    <GestionarHorarios />
+                <ProtectedRoute> {/* Solo para usuarios con rol 'asesor' */}
+                    <AdministracionAsesorias />
                 </ProtectedRoute>
             } 
         />
