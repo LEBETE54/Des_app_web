@@ -5,6 +5,7 @@ import Dashboard from './pages/dashboard';
 import Register from './pages/Register';
 import GestionarHorarios from './pages/GestionarHorarios';
 import useAuthStore from './store/authStore';
+import PerfilUsuario from './components/PerfilUsuario';
 
 // Componente para proteger rutas
 const ProtectedRoute = ({ children, rolesPermitidos }) => {
@@ -42,6 +43,16 @@ function App() {
                 </ProtectedRoute>
             } 
         />
+
+        <Route 
+            path="/perfil" 
+            element={
+                <ProtectedRoute>
+                    <PerfilUsuario />
+                </ProtectedRoute>
+            } 
+        />
+
         <Route 
             path="/gestionar-horarios" 
             element={
