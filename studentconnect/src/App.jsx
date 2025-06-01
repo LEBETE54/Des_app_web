@@ -3,7 +3,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/dashboard'; 
 import Register from './pages/Register';
-import GestionarHorarios from './pages/GestionarHorarios';
 import useAuthStore from './store/authStore';
 import PerfilUsuario from './components/PerfilUsuario';
 import AdministracionAsesorias from './components/AdministracionAsesorias';
@@ -55,7 +54,7 @@ function App() {
         />
 
         <Route 
-            path="/gestionar-horarios" 
+            path="/admin-asesoria" 
             element={
                 <ProtectedRoute> {/* Solo para usuarios con rol 'asesor' */}
                     <AdministracionAsesorias />

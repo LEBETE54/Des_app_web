@@ -74,11 +74,9 @@ const NavBar = () => {
                                         <Link to="/perfil" onClick={() => setDropdownOpen(false)}>Mi Perfil</Link> 
                                         {/* Necesitarás crear la ruta y el componente /perfil */}
                                     </li>
-                                    {user.rol === 'asesor' && (
                                         <li>
-                                            <Link to="/gestionar-horarios" onClick={() => setDropdownOpen(false)}>Mis Asesorías</Link>
+                                            <Link to="/admin-asesoria" onClick={() => setDropdownOpen(false)}>Mis Asesorías</Link>
                                         </li>
-                                    )}
                                     {/* Puedes añadir más enlaces aquí, ej. Configuración */}
                                     <li>
                                         <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
