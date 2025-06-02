@@ -1,62 +1,59 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import usuarioService from '../services/usuarioService';
+import useAuthStore from '../store/authStore'; // Para obtener el ID del usuario
 import '../styles/components/PerfilUsuario.css';
 
 const PerfilUsuario = () => {
   const navigate = useNavigate();
-  
-  // Estado inicial con datos mock (serán reemplazados por datos reales del backend)
+  const user = useAuthStore(state => state.user);
+  const userId = user?.id;
+
   const [userData, setUserData] = useState({
-    nombre_completo: 'Cargando...',
-    correo: 'Cargando...',
-    carrera: 'Cargando...',
-    semestre: 'Cargando...',
-    telefono: 'Cargando...',
+    nombre_completo: '',
+    correo: '',
+    carrera: '',
+    semestre: '',
+    telefono: '',
     avatar: null
   });
 
-  // Simulamos la carga de datos (en producción esto vendrá del backend)
+  const [editMode, setEditMode] = useState(false);
+
   useEffect(() => {
-    // TODO: Reemplazar con llamada real al backend
     const fetchUserData = async () => {
-      // Simulamos un retraso de red
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // Datos mock - en producción estos vendrán de una API
-      const mockUserData = {
-        nombre_completo: 'Osiel Modesto Modesto',
-        correo: 'mods35go@gmail.com',
-        carrera: 'Ingeniería en Sistemas',
-        semestre: '8vo Semestre',
-        telefono: '+52 55 1234 5678',
-        avatar: null
-      };
-      
-      setUserData(mockUserData);
+      if (!userId) return;
+      try {
+        const data = await usuarioService.obtenerPerfilUsuario(userId);
+        setUserData(data);
+      } catch (err) {
+        console.error("Error al cargar perfil:", err);
+      }
     };
 
     fetchUserData();
-  }, []);
+  }, [userId]);
 
-  // Función para manejar cambios cuando se implemente la edición
   const handleInputChange = (e) => {
-    // TODO: Implementar lógica de actualización cuando se conecte al backend
     const { name, value } = e.target;
-    setUserData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setUserData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Función para regresar al dashboard
-  const handleBackToDashboard = () => {
-    navigate('/dashboard'); // Ajusta la ruta según tu configuración
+  const handleGuardar = async () => {
+    try {
+      await usuarioService.actualizarPerfilUsuario(userId, userData);
+      alert("Perfil actualizado con éxito.");
+      setEditMode(false);
+    } catch (err) {
+      console.error("Error al guardar perfil:", err);
+      alert("Hubo un problema al actualizar tu perfil.");
+    }
   };
 
   return (
     <div className="profile-container">
       <div className="profile-header">
-        <button onClick={handleBackToDashboard} className="back-button">
+        <button onClick={() => navigate('/dashboard')} className="back-button">
           &larr; Volver al Dashboard
         </button>
         <h2>Mi Perfil</h2>
@@ -65,84 +62,45 @@ const PerfilUsuario = () => {
             <img src={userData.avatar} alt="Avatar" />
           ) : (
             <div className="avatar-placeholder">
-              {userData.nombre_completo.split(' ').map(n => n[0]).join('')}
+              {userData.nombre_completo?.split(' ').map(n => n[0]).join('')}
             </div>
           )}
         </div>
       </div>
 
       <div className="profile-details">
-        <div className="profile-field">
-          <label htmlFor="fullName">Nombre completo</label>
-          <input
-            type="text"
-            id="nombre_completo"
-            name="nombre_completo"
-            value={userData.nombre_completo}
-            onChange={handleInputChange}
-            readOnly // Temporal hasta implementar edición
-          />
-        </div>
-
-        <div className="profile-field">
-          <label htmlFor="email">Correo electrónico</label>
-          <input
-            type="email"
-            id="correo"
-            name="correo"
-            value={userData.correo}
-            onChange={handleInputChange}
-            readOnly
-          />
-        </div>
-
-        <div className="profile-field-group">
-          <div className="profile-field">
-            <label htmlFor="career">Carrera</label>
+        {['nombre_completo', 'correo', 'carrera', 'semestre', 'telefono'].map((field) => (
+          <div className="profile-field" key={field}>
+            <label htmlFor={field}>
+              {field.replace('_', ' ').replace(/^./, str => str.toUpperCase())}
+            </label>
             <input
-              type="text"
-              id="carrera"
-              name="carrera"
-              value={userData.carrera}
+              type={field === 'correo' ? 'email' : 'text'}
+              id={field}
+              name={field}
+              value={userData[field]}
               onChange={handleInputChange}
-              readOnly
+              readOnly={!editMode || field === 'correo'} // No permitir cambiar correo
             />
           </div>
-
-          <div className="profile-field">
-            <label htmlFor="semester">Semestre</label>
-            <input
-              type="text"
-              id="semestre"
-              name="semestre"
-              value={userData.semestre}
-              onChange={handleInputChange}
-              readOnly
-            />
-          </div>
-        </div>
-
-        <div className="profile-field">
-          <label htmlFor="phone">Teléfono</label>
-          <input
-            type="tel"
-            id="telefono"
-            name="telefono"
-            value={userData.telefono}
-            onChange={handleInputChange}
-            readOnly
-          />
-        </div>
+        ))}
       </div>
 
-      {/* TODO: Implementar botones de acción cuando se conecte al backend */}
       <div className="profile-actions">
-        <button className="edit-button" disabled>
-          Editar Perfil
-        </button>
-        <button className="save-button" disabled>
-          Guardar Cambios
-        </button>
+        {!editMode ? (
+          <button className="edit-button" onClick={() => setEditMode(true)}>
+            Editar Perfil
+          </button>
+        ) : (
+          <>
+            <button className="save-button" onClick={handleGuardar}>
+              Guardar Cambios
+            </button>
+            <button className="edit-button" onClick={() => setEditMode(false)}>
+              Cancelar
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

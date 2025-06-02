@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path'); 
 require('dotenv').config();
+const multer = require('multer');
 const dbConnection = require('./config/db');
 
 const app = express();
@@ -27,6 +28,7 @@ console.log("-> Rutas de /api/recursos configuradas.");
 app.use('/api/asesorias', require('./routes/asesorias'));
 console.log("-> Rutas de /api/asesorias configuradas.");
 app.use('/api/reservas', require('./routes/reservas'));
+app.use('/api/usuarios', require('./routes/usuarioRoutes'));
 
 
 
