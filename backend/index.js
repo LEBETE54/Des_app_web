@@ -29,6 +29,8 @@ app.use('/api/asesorias', require('./routes/asesorias'));
 console.log("-> Rutas de /api/asesorias configuradas.");
 app.use('/api/reservas', require('./routes/reservas'));
 app.use('/api/usuarios', require('./routes/usuarioRoutes'));
+app.use('/api/asesoria-admin', require('./routes/asesoriaAdminRoutes'));
+console.log("-> Rutas de /api/asesoria-admin configuradas.");
 
 
 
