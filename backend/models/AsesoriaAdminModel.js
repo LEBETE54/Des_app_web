@@ -20,15 +20,15 @@ const AsesoriaAdminModel = {
     ];
 
     const query = `
-      UPDATE horarios_disponibles_asesor SET
-        titulo_asesoria = ?,
-        descripcion_asesoria = ?,
-        fecha_hora_inicio = ?,
-        fecha_hora_fin = ?,
-        modalidad = ?,
-        enlace_o_lugar = ?
-        materia_id = ?
-      WHERE id = ?
+       UPDATE horarios_disponibles_asesor SET
+    titulo_asesoria = ?,
+    descripcion_asesoria = ?,
+    fecha_hora_inicio = ?,
+    fecha_hora_fin = ?,
+    modalidad = ?,
+    enlace_o_lugar = ?,
+    materia_id = ?
+  WHERE id = ?
     `;
     db.query(query, campos, callback);
   },
@@ -45,6 +45,17 @@ const AsesoriaAdminModel = {
   `;
   db.query(query, [asesoriaId, alumnoId], callback);
 },
+
+obtenerUltimaAsesoriaDeTutor: (tutorId, callback) => {
+  const query = `
+    SELECT * FROM horarios_disponibles_asesor
+    WHERE asesor_usuario_id = ?
+    ORDER BY fecha_hora_inicio DESC
+    LIMIT 1
+  `;
+  db.query(query, [tutorId], callback);
+},
+
 
 
  obtenerAlumnos: (id, callback) => {

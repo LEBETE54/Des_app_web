@@ -31,11 +31,18 @@ export const eliminarAlumnoDeAsesoria = async (asesoriaId, alumnoId) => {
   return response.data;
 };
 
+export const obtenerUltimaAsesoriaDelTutor = async (tutorId) => {
+  const response = await apiClient.get(`/asesoria-admin/tutor/${tutorId}/ultima`);
+  return response.data;
+};
+
+
 
 export default {
   obtenerAsesoriaPorId,
   actualizarAsesoria,
   eliminarAsesoria,
   obtenerAlumnosInscritos,
-  eliminarAlumnoDeAsesoria
+  eliminarAlumnoDeAsesoria,
+  obtenerUltimaAsesoriaDelTutor
 };

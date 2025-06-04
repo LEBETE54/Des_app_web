@@ -29,6 +29,32 @@ exports.obtenerAlumnosDeAsesoria = (req, res) => {
   });
 };
 
+exports.obtenerUltimaAsesoriaDeTutor = (req, res) => {
+  const tutorId = req.params.id;
+
+  AsesoriaAdminModel.obtenerUltimaAsesoriaDeTutor(tutorId, (err, result) => {
+    if (err) {
+      console.error("Error al obtener la última asesoría:", err);
+      return res.status(500).json({ mensaje: 'Error al obtener la última asesoría.' });
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({ mensaje: 'No se encontraron asesorías para este tutor.' });
+    }
+
+    const asesoria = result[0];
+
+    AsesoriaAdminModel.obtenerAlumnos(asesoria.id, (errAlumnos, alumnos) => {
+      if (errAlumnos) {
+        console.error("Error al obtener alumnos:", errAlumnos);
+        return res.status(500).json({ mensaje: 'Error al obtener alumnos.' });
+      }
+
+      res.json({ asesoria, alumnos });
+    });
+  });
+};
+
 
 
 exports.actualizarAsesoria = (req, res) => {

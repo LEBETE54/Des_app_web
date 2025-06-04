@@ -25,45 +25,56 @@ const AdministracionAsesorias = () => {
   const [alumnosInscritos, setAlumnosInscritos] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-      const { asesoria, alumnos } = await asesoriaAdminService.obtenerAsesoriaPorId(userId);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const { asesoria, alumnos } = await asesoriaAdminService.obtenerUltimaAsesoriaDelTutor(userId);
       setAsesoria(asesoria);
       setAlumnosInscritos(alumnos);
+
       const materiasData = await materiaService.obtenerTodasLasMaterias();
       setMaterias(materiasData);
-      } catch (error) {
+    } catch (error) {
       console.error('Error al cargar datos:', error);
     }
-    };
+  };
 
+  if (userId) {
     fetchData();
-  }, [userId]);
+  }
+}, [userId]);
+
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if(e.target.nodeName == "OPTION") name = e.target.parentElement.name
+    console.log("name", name)
     setAsesoria(prev => ({
       ...prev,
       [name]: value
     }));
   };
 
+  
+
   const handleSaveChanges = async () => {
-    try {
-      await asesoriaAdminService.actualizarAsesoria(userId, asesoria);
-      alert("Cambios guardados con éxito");
-      setIsEditing(false);
-    } catch (error) {
-      console.error("Error al guardar cambios:", error);
-      alert("Error al guardar los cambios.");
-    }
-  };
+  try {
+    console.log("🔁 Enviando datos a actualizar:", asesoria);
+    await asesoriaAdminService.actualizarAsesoria(asesoria.id, asesoria); // asegúrate que sea asesoria.id, no userId
+    alert("Cambios guardados con éxito");
+    setIsEditing(false);
+  } catch (error) {
+    console.error("❌ Error al guardar cambios:", error);
+  }
+};
+
+
+
 
   const handleDeleteAsesoria = async () => {
     if (window.confirm("¿Seguro que deseas eliminar esta asesoría?")) {
       try {
-        await asesoriaAdminService.eliminarAsesoria(userId);
+        await asesoriaAdminService.eliminarAsesoria(asesoria.id);
         alert("Asesoría eliminada");
         navigate('/dashboard');
       } catch (error) {
