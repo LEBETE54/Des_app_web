@@ -12,8 +12,8 @@ const AsesoriaCard = ({ asesoria, onReservarClick, isAuthenticated, user, onSali
     return (
         <div className="asesoria-card" style={{ border: '1px solid #ddd', padding: '15px', borderRadius: '8px', marginBottom: '15px', background: '#fff', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
             <h3>{asesoria.nombre_materia || 'Asesoría General'}</h3>
+                {asesoria.titulo_asesoria && (<p><strong>Nombre de la asesoría:</strong> {asesoria.titulo_asesoria}</p>)}
             <p><strong>Asesor:</strong> {asesoria.nombre_asesor || 'N/A'}</p>
-            {asesoria.foto_asesor && <img src={`http://localhost:4000${asesoria.foto_asesor}`} alt={asesoria.nombre_asesor} style={{width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover', marginBottom: '10px'}} onError={(e) => e.target.style.display='none'}/>}
             <p><strong>Fecha:</strong> {new Date(asesoria.fecha_hora_inicio).toLocaleDateString('es-MX')}</p>
             <p><strong>Horario:</strong> 
             {new Date(asesoria.fecha_hora_inicio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - 
