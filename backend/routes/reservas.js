@@ -47,5 +47,25 @@ router.get('/por-estudiante/:id', (req, res) => {
   });
 });
 
+// Eliminar una reserva (salir de una asesoría)
+router.delete('/salir/:horarioId/:usuarioId', (req, res) => {
+  const { horarioId, usuarioId } = req.params;
+
+  const query = `
+    DELETE FROM reservas_estudiantes 
+    WHERE horario_disponibilidad_id = ? AND usuario_id = ?
+  `;
+
+  db.query(query, [horarioId, usuarioId], (err, result) => {
+    if (err) {
+      console.error("Error al cancelar la reserva:", err);
+      return res.status(500).json({ mensaje: 'Error al salir de la asesoría.' });
+    }
+
+    res.json({ mensaje: 'Reserva cancelada correctamente.' });
+  });
+});
+
+
 
 module.exports = router;

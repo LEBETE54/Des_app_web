@@ -4,52 +4,66 @@ import useAuthStore from '../store/authStore';
 import horarioService from '../services/horarioService';
 import materiaService from '../services/materiaService';
 import reservaService from '../services/reservaService';
-import { useNavigate } from 'react-router-dom'; // Para redirigir si no está logueado para reservar
-
-
-const AsesoriaCard = ({ asesoria, onReservarClick, isAuthenticated, user }) => {
+import { useNavigate } from 'react-router-dom';
 
 
 
+const AsesoriaCard = ({ asesoria, onReservarClick, isAuthenticated, user, onSalirClick, estaInscrito }) => {
     return (
         <div className="asesoria-card" style={{ border: '1px solid #ddd', padding: '15px', borderRadius: '8px', marginBottom: '15px', background: '#fff', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
             <h3>{asesoria.nombre_materia || 'Asesoría General'}</h3>
             <p><strong>Asesor:</strong> {asesoria.nombre_asesor || 'N/A'}</p>
             {asesoria.foto_asesor && <img src={`http://localhost:4000${asesoria.foto_asesor}`} alt={asesoria.nombre_asesor} style={{width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover', marginBottom: '10px'}} onError={(e) => e.target.style.display='none'}/>}
-           <p><strong>Fecha:</strong> {new Date(asesoria.fecha_hora_inicio).toLocaleDateString('es-MX')}</p>
+            <p><strong>Fecha:</strong> {new Date(asesoria.fecha_hora_inicio).toLocaleDateString('es-MX')}</p>
             <p><strong>Horario:</strong> 
             {new Date(asesoria.fecha_hora_inicio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - 
             {new Date(asesoria.fecha_hora_fin).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
             <p><strong>Modalidad:</strong> <span style={{textTransform: 'capitalize'}}>{asesoria.modalidad}</span></p>
             {asesoria.enlace_o_lugar && asesoria.modalidad === 'presencial' && <p><strong>Lugar:</strong> {asesoria.enlace_o_lugar}</p>}
             {asesoria.asesor_descripcion_corta && <p><small><em>"{asesoria.asesor_descripcion_corta}"</em></small></p>}
-            
+
             {isAuthenticated && user?.id !== asesoria.asesor_usuario_id && (
-            <button onClick={() => onReservarClick(asesoria.id)}>
-            Reservar asesoría
-            </button>
-        )}
+                estaInscrito ? (
+                      <button 
+                         onClick={() => onSalirClick(asesoria.id)}
+                            style={{ backgroundColor: '#dc3545', 
+                            color: 'white', 
+                            padding: '8px 12px', 
+                            border: 'none', 
+                            borderRadius: '5px', 
+                            cursor: 'pointer' }}>
+                            Salir de la asesoría    
+                        </button>
+                ) : (
+                    <button onClick={() => onReservarClick(asesoria.id)}
+                    style={{ backgroundColor: '#28a745', 
+                            color: 'white', 
+                            padding: '8px 12px', 
+                            border: 'none', 
+                            borderRadius: '5px', 
+                            cursor: 'pointer' }}>
+                        Reservar asesoría</button>
+                )
+            )}
 
             {!isAuthenticated && (
-                 <p style={{marginTop: '10px'}}><small><em>Inicia sesión para reservar.</em></small></p>
+                <p style={{marginTop: '10px'}}><small><em>Inicia sesión para reservar.</em></small></p>
             )}
-    </div>
-            );
+        </div>
+    );
 };
-
 
 const BuscarAsesorias = () => {
     const isAuthenticated = useAuthStore(state => state.isAuthenticated);
-
     const navigate = useNavigate();
     const [asesoriasMostradas, setAsesoriasMostradas] = useState([]);
     const [materias, setMaterias] = useState([]);
     const [filtroMateria, setFiltroMateria] = useState('');
     const [filtroBusquedaTexto, setFiltroBusquedaTexto] = useState('');
-    const [pestanaActiva, setPestanaActiva] = useState('enEspera'); // 'enEspera', 'activas', 'terminadas'
-
+    const [pestanaActiva, setPestanaActiva] = useState('enEspera');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [reservasUsuario, setReservasUsuario] = useState([]);
 
     const cargarMaterias = useCallback(async () => {
         try {
@@ -61,16 +75,15 @@ const BuscarAsesorias = () => {
         }
     }, []);
 
-
     const fetchAndFilterAsesorias = useCallback(async () => {
         setIsLoading(true);
         setError('');
         try {
             const filtrosApi = {};
             if (filtroMateria) filtrosApi.materia_id = filtroMateria;
-            
+
             let horariosFetched = await horarioService.obtenerHorariosDisponiblesParaEstudiantes(filtrosApi);
-            if (!Array.isArray(horariosFetched)) { 
+            if (!Array.isArray(horariosFetched)) {
                 console.warn("La respuesta de obtenerHorariosDisponiblesParaEstudiantes no fue un array:", horariosFetched);
                 horariosFetched = [];
             }
@@ -80,24 +93,24 @@ const BuscarAsesorias = () => {
 
             if (pestanaActiva === 'enEspera') {
                 filtradosPorEstadoYTexto = horariosFetched.filter(a => new Date(a.fecha_hora_inicio) > ahora);
-                } else if (pestanaActiva === 'activas') {
+            } else if (pestanaActiva === 'activas') {
                 filtradosPorEstadoYTexto = horariosFetched.filter(a => {
-                const inicio = new Date(a.fecha_hora_inicio);
-                const fin = new Date(a.fecha_hora_fin);
-    return inicio <= ahora && ahora < fin;
-  });
+                    const inicio = new Date(a.fecha_hora_inicio);
+                    const fin = new Date(a.fecha_hora_fin);
+                    return inicio <= ahora && ahora < fin;
+                });
             } else if (pestanaActiva === 'terminadas') {
-                filtradosPorEstadoYTexto = []; // Placeholder
+                filtradosPorEstadoYTexto = []; 
                 setError(prev => prev + (prev ? "; " : "") + "Un 70 y sin ver profe");
             }
-            
+
             if (filtroBusquedaTexto) {
                 const busquedaLower = filtroBusquedaTexto.toLowerCase();
                 filtradosPorEstadoYTexto = filtradosPorEstadoYTexto.filter(a => 
                     (a.nombre_materia && a.nombre_materia.toLowerCase().includes(busquedaLower)) ||
                     (a.nombre_asesor && a.nombre_asesor.toLowerCase().includes(busquedaLower)) ||
                     (a.asesor_descripcion_corta && a.asesor_descripcion_corta.toLowerCase().includes(busquedaLower)) ||
-                    (a.titulo && a.titulo.toLowerCase().includes(busquedaLower)) // Si los horarios tienen un título
+                    (a.titulo && a.titulo.toLowerCase().includes(busquedaLower))
                 );
             }
             setAsesoriasMostradas(filtradosPorEstadoYTexto);
@@ -112,33 +125,52 @@ const BuscarAsesorias = () => {
         cargarMaterias();
     }, [cargarMaterias]);
 
+    const user = useAuthStore(state => state.user);
+
+    useEffect(() => {
+        if (isAuthenticated && user) {
+            reservaService.obtenerReservasPorEstudiante(user.id)
+                .then(setReservasUsuario)
+                .catch(err => console.error("Error al obtener reservas del usuario:", err));
+        }
+    }, [isAuthenticated, user]);
+
     useEffect(() => {
         fetchAndFilterAsesorias();
     }, [fetchAndFilterAsesorias]);
 
-   const user = useAuthStore(state => state.user); 
+    const handleReservarClick = async (horarioId) => {
+        if (!isAuthenticated || !user) {
+            alert("Debes iniciar sesión para reservar.");
+            return navigate('/login');
+        }
 
-   const handleReservarClick = async (horarioId) => {
-  if (!isAuthenticated || !user) {
-    alert("Debes iniciar sesión para reservar.");
-    return navigate('/login');
-  }
+        try {
+            const yaReservada = reservasUsuario.some(r => r.horario_disponibilidad_id === horarioId);
 
+            if (yaReservada) {
+                alert("Ya estás inscrito a esta asesoría.");
+                return;
+            }
+
+            await reservaService.reservarAsesoria(horarioId, user.id);
+            alert("¡Te has inscrito exitosamente a la asesoría!");
+            window.location.reload();
+            fetchAndFilterAsesorias();
+        } catch (err) {
+            console.error("Error al reservar:", err);
+            alert("Hubo un problema al reservar la asesoría.");
+        }
+    };
+
+    const handleSalirClick = async (horarioId) => {
   try {
-    const reservas = await reservaService.obtenerReservasPorEstudiante(user.id);
-    const yaReservada = reservas.some(r => r.horario_disponibilidad_id === horarioId);
-
-    if (yaReservada) {
-      alert("Ya estás inscrito a esta asesoría.");
-      return;
-    }
-
-    await reservaService.reservarAsesoria(horarioId, user.id);
-    alert("¡Te has inscrito exitosamente a la asesoría!");
-    fetchAndFilterAsesorias(); 
+    await reservaService.salirDeAsesoria(horarioId, user.id);
+    alert("Te has salido de la asesoría.");
+    window.location.reload();
   } catch (err) {
-    console.error("Error al reservar:", err);
-    alert("Hubo un problema al reservar la asesoría.");
+    console.error("Error al salir de la asesoría:", err);
+    alert("No se pudo salir de la asesoría.");
   }
 };
 
@@ -165,9 +197,7 @@ const BuscarAsesorias = () => {
                         <option key={m.id} value={m.id}>{m.nombre}</option>
                     ))}
                 </select>
-
             </div>
-
 
             <div className="pestañas-asesorias" style={{marginBottom: '20px', display: 'flex', justifyContent:'center', gap: '10px', borderBottom: '1px solid #dee2e6'}}>
                 {['enEspera', 'activas', 'terminadas'].map(pestana => (
@@ -191,7 +221,7 @@ const BuscarAsesorias = () => {
 
             {isLoading && <p style={{textAlign: 'center'}}>Buscando asesorías...</p>}
             {error && <p className="error-message" style={{color: 'red', textAlign: 'center'}}>{error}</p>}
-            
+
             {!isLoading && asesoriasMostradas.length === 0 && (
                 <p style={{textAlign: 'center', padding: '20px', color: '#6c757d'}}>
                     No hay asesorías disponibles que coincidan con los criterios actuales para la pestaña "{pestanaActiva === 'enEspera' ? 'Próximas' : pestanaActiva}".
@@ -199,18 +229,23 @@ const BuscarAsesorias = () => {
             )}
 
             <div className="lista-asesorias">
-                {asesoriasMostradas.map(asesoria => (
-                   <AsesoriaCard 
-                    key={asesoria.id} 
-                    asesoria={asesoria} 
-                    onReservarClick={handleReservarClick} 
-                    isAuthenticated={isAuthenticated}
-                    user={user}/>
-                ))}
+                {asesoriasMostradas.map(asesoria => {
+                    const estaInscrito = reservasUsuario.some(r => r.horario_disponibilidad_id === asesoria.id);
+                    return (
+                        <AsesoriaCard 
+                            key={asesoria.id} 
+                            asesoria={asesoria} 
+                            onReservarClick={handleReservarClick} 
+                            isAuthenticated={isAuthenticated}
+                            user={user}
+                            onSalirClick={handleSalirClick}
+                            estaInscrito={estaInscrito}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
 };
 
 export default BuscarAsesorias;
-

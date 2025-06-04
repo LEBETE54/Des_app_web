@@ -13,7 +13,13 @@ const obtenerReservasPorEstudiante = async (id) => {
   return response.data;
 };
 
+const salirDeAsesoria = async (horarioId, usuarioId) => {
+  const response = await apiClient.delete(`/reservas/salir/${horarioId}/${usuarioId}`);
+  return response.data;
+};
+
 export default {
   reservarAsesoria,
-  obtenerReservasPorEstudiante
+  obtenerReservasPorEstudiante,
+  salirDeAsesoria
 };
