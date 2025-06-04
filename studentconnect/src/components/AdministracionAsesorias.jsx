@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import asesoriaAdminService from '../services/asesoriaAdminService';
+import materiaService from '../services/materiaService'; 
 import '../styles/components/AdministracionAsesorias.css';
 import useAuthStore from '../store/authStore'; 
 
@@ -9,26 +10,34 @@ const AdministracionAsesorias = () => {
   const navigate = useNavigate();
   const user = useAuthStore(state => state.user);
   const userId = user?.id;
-
   const [asesoria, setAsesoria] = useState({
     titulo_asesoria: '',
     descripcion_asesoria: '',
     fecha_hora_inicio: '',
     fecha_hora_fin: '',
     modalidad: '',
+    materia_id: '',
     enlace_o_lugar: ''
-  });
 
+
+  });
+  const [materias, setMaterias] = useState([]);
   const [alumnosInscritos, setAlumnosInscritos] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      try {
       const { asesoria, alumnos } = await asesoriaAdminService.obtenerAsesoriaPorId(userId);
-setAsesoria(asesoria);
-setAlumnosInscritos(alumnos);
-
+      setAsesoria(asesoria);
+      setAlumnosInscritos(alumnos);
+      const materiasData = await materiaService.obtenerTodasLasMaterias();
+      setMaterias(materiasData);
+      } catch (error) {
+      console.error('Error al cargar datos:', error);
+    }
     };
+
     fetchData();
   }, [userId]);
 
@@ -137,6 +146,30 @@ setAlumnosInscritos(alumnos);
           </div>
         </div>
 
+          <div className="form-group">
+          <label htmlFor="materiaId">Materia Principal (opcional):</label>
+          <select
+          id="materiaId"
+          name="materia_id"
+          value={asesoria.materia_id || ''}
+          onChange={handleInputChange}
+          disabled={!isEditing || materias.length === 0}
+          className={isEditing ? 'editable' : ''}
+          >
+    <option value="">-- General / Varias --</option>
+    {materias.map((m) => (
+      <option key={m.id} value={m.id}>
+        {m.nombre_materia || m.nombre}
+      </option>
+    ))}
+  </select>
+  {materias.length === 0 && !isEditing && (
+    <small>No hay materias cargadas.</small>
+  )}
+</div>
+
+
+
         <div className="form-row">
           <div className="form-group">
             <label>Modalidad</label>
@@ -167,6 +200,7 @@ setAlumnosInscritos(alumnos);
           </div>
         </div>
       </div>
+
 
       <div className="alumnos-section">
         <h3>Alumnos Inscritos ({alumnosInscritos.length})</h3>

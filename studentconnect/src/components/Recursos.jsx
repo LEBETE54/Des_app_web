@@ -23,7 +23,7 @@ const Recursos = () => {
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-    const esAsesor = isAuthenticated && userRol === 'asesor';
+    const esAsesor = isAuthenticated;
 
     const cargarRecursos = useCallback(async () => {
         // No establecer isLoading aquí directamente para permitir cargas separadas si es necesario

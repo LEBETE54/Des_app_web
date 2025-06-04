@@ -4,7 +4,7 @@ const path = require('path'); // Módulo de Node para trabajar con rutas de arch
 
 
 exports.crearRecurso = async (req, res) => {
-    if (!req.usuario || req.usuario.rol !== 'asesor') {
+    if (!req.usuario) {
         return res.status(403).json({ mensaje: 'Acceso denegado. Solo los asesores pueden crear recursos.' });
     }
 
@@ -90,7 +90,7 @@ exports.listarMisRecursos = (req, res) => {
 
 
 exports.eliminarRecurso = (req, res) => {
-    if (!req.usuario || req.usuario.rol !== 'asesor') { // Solo asesores pueden borrar
+    if (!req.usuario ) { // Solo asesores pueden borrar
         return res.status(403).json({ mensaje: 'Acceso denegado.' });
     }
     const recursoId = req.params.id;

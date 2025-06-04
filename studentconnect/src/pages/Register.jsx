@@ -121,11 +121,6 @@ const Register = () => {
                     <input type="email" name="correo" placeholder="Correo electrónico" value={formData.correo} onChange={handleChange} required disabled={isLoading} />
                     <input type="password" name="contrasenia" placeholder="Contraseña" value={formData.contrasenia} onChange={handleChange} required disabled={isLoading} />
                     <input type="password" name="confirmarContrasenia" placeholder="Confirmar Contraseña" value={formData.confirmarContrasenia} onChange={handleChange} required disabled={isLoading} />
-                    
-                    <select name="rol" value={formData.rol} onChange={handleChange} disabled={isLoading} style={{marginBottom: '15px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: '100%'}}>
-                        <option value="estudiante">Soy Estudiante</option>
-                        <option value="asesor">Quiero ser Asesor</option>
-                    </select>
                     <input type="text" name="carrera" placeholder="Carrera (opcional)" value={formData.carrera} onChange={handleChange} disabled={isLoading} />
                     <input type="number" name="semestre" placeholder="Semestre (opcional, ej: 5)" value={formData.semestre} onChange={handleChange} disabled={isLoading} />
                     <input type="tel" name="telefono" placeholder="Teléfono (opcional)" value={formData.telefono} onChange={handleChange} disabled={isLoading} />

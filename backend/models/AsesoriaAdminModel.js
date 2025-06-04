@@ -15,6 +15,7 @@ const AsesoriaAdminModel = {
       data.fecha_hora_fin,
       data.modalidad,
       data.enlace_o_lugar,
+      data.materia_id,
       id
     ];
 
@@ -26,6 +27,7 @@ const AsesoriaAdminModel = {
         fecha_hora_fin = ?,
         modalidad = ?,
         enlace_o_lugar = ?
+        materia_id = ?
       WHERE id = ?
     `;
     db.query(query, campos, callback);

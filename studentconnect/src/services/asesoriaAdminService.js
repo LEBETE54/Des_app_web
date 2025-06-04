@@ -31,6 +31,7 @@ export const eliminarAlumnoDeAsesoria = async (asesoriaId, alumnoId) => {
   return response.data;
 };
 
+
 export default {
   obtenerAsesoriaPorId,
   actualizarAsesoria,

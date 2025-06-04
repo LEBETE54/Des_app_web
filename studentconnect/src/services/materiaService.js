@@ -7,20 +7,16 @@ const API_ENDPOINT_MATERIAS = '/materias'; // Endpoint del backend para materias
 
 const obtenerTodasLasMaterias = async () => {
     try {
-        // apiClient se encarga de la baseURL y de añadir el token de autenticación si es necesario
         const response = await apiClient.get(API_ENDPOINT_MATERIAS);
         return response.data; 
     } catch (error) {
         console.error('Error en servicio obtenerTodasLasMaterias:', error.response ? error.response.data : error.message);
-        // Relanzamos el error para que el componente que llama (GestionarHorarios.jsx) pueda manejarlo
         throw error.response ? error.response.data : new Error('Error al obtener la lista de materias desde el servidor.');
     }
 };
 
 const materiaService = {
     obtenerTodasLasMaterias,
-    // Aquí podrías añadir más funciones en el futuro si las necesitas,
-    // por ejemplo, para que un administrador cree nuevas materias.
 };
 
 export default materiaService;
