@@ -226,8 +226,16 @@ const Recursos = () => {
                             )}
                         </div>
                         {esAsesor && recurso.usuario_id_autor === user.id && (
-                             <button onClick={() => handleEliminarRecurso(recurso.id)} disabled={isLoading} className="btn-eliminar-recurso">Eliminar</button>
-                        )}
+                            <div className="acciones-recurso">
+                                <button onClick={() => handleEliminarRecurso(recurso.id)} disabled={isLoading} className="btn-eliminar-recurso">
+                                    Eliminar
+                                    </button>
+                                    <button onClick={() => window.location.href = `/recursos/editar/${recurso.id}`} className="btn-editar-recurso">
+                                        Editar
+    </button>
+  </div>
+)}
+
                     </div>
                 ))}
             </div>

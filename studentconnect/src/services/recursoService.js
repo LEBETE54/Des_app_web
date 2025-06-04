@@ -65,14 +65,45 @@ const eliminarRecurso = async (id) => {
     }
 };
 
+/**
+ * Obtiene un recurso específico por su ID.
+ * @param {number|string} id - ID del recurso a obtener.
+ */
+const obtenerRecursoPorId = async (id) => {
+    try {
+        const response = await apiClient.get(`${API_ENDPOINT_RECURSOS}/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error en servicio obtenerRecursoPorId:', error.response ? error.response.data : error.message);
+        throw error.response ? error.response.data : new Error('Error al obtener el recurso');
+    }
+};
+
+/**
+ * Actualiza un recurso existente.
+ * @param {number|string} id - ID del recurso a actualizar.
+ * @param {object} data - Objeto con los datos a actualizar: { titulo, descripcion, enlace, tipo }
+ */
+const actualizarRecurso = async (id, data) => {
+    try {
+        const response = await apiClient.put(`${API_ENDPOINT_RECURSOS}/${id}`, data);
+        return response.data;
+    } catch (error) {
+        console.error('Error en servicio actualizarRecurso:', error.response ? error.response.data : error.message);
+        throw error.response ? error.response.data : new Error('Error al actualizar el recurso');
+    }
+};
+
+
+
 // Agrupamos las funciones en un objeto para exportarlas
 const recursoService = {
     crearRecurso,
     obtenerRecursosPublicos,
     obtenerMisRecursos,
     eliminarRecurso,
-    // Aquí podrías añadir más funciones en el futuro, como actualizarRecurso(id, data)
+    obtenerRecursoPorId,
+    actualizarRecurso
 };
 
-// Exportamos el objeto como la exportación por defecto del módulo
 export default recursoService;

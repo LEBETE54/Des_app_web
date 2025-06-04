@@ -1,0 +1,52 @@
+.formulario-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.formulario-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.formulario-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formulario-container label {
+  font-weight: bold;
+  color: #444;
+}
+
+.formulario-container input,
+.formulario-container textarea,
+.formulario-container select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  resize: vertical;
+}
+
+.formulario-container button {
+  padding: 10px;
+  background-color: #0288d1;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.formulario-container button:hover {
+  background-color: #0277bd;
+}

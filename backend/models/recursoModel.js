@@ -48,6 +48,11 @@ const Recurso = {
         db.query(query, [id], callback);
     },
 
+     update: (id, data, callback) => {
+        const query = 'UPDATE recursos SET ? WHERE id = ?';
+        db.query(query, [data, id], callback);
+    },
+
     delete: (id, usuarioIdAutor, callback) => {
         const query = 'DELETE FROM recursos WHERE id = ? AND usuario_id_autor = ?';
         db.query(query, [id, usuarioIdAutor], callback);

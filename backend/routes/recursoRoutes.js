@@ -52,4 +52,8 @@ router.get('/mis-recursos', authMiddleware, recursoController.listarMisRecursos)
 // DELETE /api/recursos/:id - Asesor elimina su recurso
 router.delete('/:id', authMiddleware, recursoController.eliminarRecurso);
 
+router.get('/:id', authMiddleware, recursoController.obtenerRecursoPorId);
+router.put('/:id', authMiddleware, recursoController.actualizarRecurso);
+
+
 module.exports = router;

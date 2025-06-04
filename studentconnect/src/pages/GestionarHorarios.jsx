@@ -101,12 +101,21 @@ const GestionarHorarios = () => {
         };
         
         const inicioCompleto = new Date(`${dataParaEnviar.fecha}T${dataParaEnviar.hora_inicio}`);
-        const finCompleto = new Date(`${dataParaEnviar.fechaFin}T${dataParaEnviar.hora_fin_form}`);
+const finCompleto = new Date(`${dataParaEnviar.fechaFin}T${dataParaEnviar.hora_fin_form}`);
 
-        if (finCompleto <= inicioCompleto) {
-            setError('La fecha/hora de fin debe ser estrictamente posterior a la fecha/hora de inicio.');
-            setIsLoading(false); return;
-        }
+const ahora = new Date();
+if (inicioCompleto < ahora) {
+    setError('No puedes crear una asesoría con fecha u hora de inicio en el pasado.');
+    setIsLoading(false);
+    return;
+}
+
+if (finCompleto <= inicioCompleto) {
+    setError('La fecha/hora de fin debe ser estrictamente posterior a la fecha/hora de inicio.');
+    setIsLoading(false);
+    return;
+}
+
 
         // ---- DEBUG: VER QUÉ SE ENVÍA ----
         console.log("FRONTEND: Datos que se enviarán al backend (dataParaEnviar):", JSON.stringify(dataParaEnviar, null, 2));

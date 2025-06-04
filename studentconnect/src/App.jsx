@@ -6,6 +6,8 @@ import Register from './pages/Register';
 import useAuthStore from './store/authStore';
 import PerfilUsuario from './components/PerfilUsuario';
 import AdministracionAsesorias from './components/AdministracionAsesorias';
+import EditarRecurso from './components/EditarRecurso'; // ajusta la ruta según tu estructura
+
 
 // Componente para proteger rutas
 const ProtectedRoute = ({ children, rolesPermitidos }) => {
@@ -52,6 +54,12 @@ function App() {
                 </ProtectedRoute>
             } 
         />
+        <Route 
+            path="/recursos/editar/:id" 
+            element={<ProtectedRoute>
+              <EditarRecurso/>
+            </ProtectedRoute>
+          } />
 
         <Route 
             path="/admin-asesoria" 

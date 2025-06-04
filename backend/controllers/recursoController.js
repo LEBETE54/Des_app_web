@@ -1,7 +1,7 @@
 // Ruta: backend/controllers/recursoController.js
+const db = require('../config/db'); // ← Esto probablemente falta
 const Recurso = require('../models/recursoModel');
 const path = require('path'); // Módulo de Node para trabajar con rutas de archivos
-
 
 exports.crearRecurso = async (req, res) => {
     if (!req.usuario) {
@@ -17,22 +17,17 @@ exports.crearRecurso = async (req, res) => {
 
     let archivo_adjunto_url = null;
 
-    // req.file es añadido por multer si se sube un archivo con el nombre 'archivoRecurso'
     if (req.file) {
-
         archivo_adjunto_url = `/uploads/recursos/${req.file.filename}`;
     } else if (tipo_recurso === 'documento_pdf' || tipo_recurso === 'imagen') {
         if (!enlace_url) {
-             // return res.status(400).json({ mensaje: 'Para tipo PDF o Imagen, se requiere un archivo o un enlace.' });
-             // Decidimos permitir PDF/Imagen sin archivo si hay enlace_url
+            // Permitimos PDF/Imagen sin archivo si hay enlace_url
         }
     }
-
 
     if ((tipo_recurso === 'video' || tipo_recurso === 'articulo_web') && !enlace_url) {
         return res.status(400).json({ mensaje: 'Para tipo Video o Artículo Web, se requiere un enlace.' });
     }
-
 
     const nuevoRecurso = {
         usuario_id_autor,
@@ -40,10 +35,9 @@ exports.crearRecurso = async (req, res) => {
         descripcion: descripcion || null,
         enlace_url: enlace_url || null,
         tipo_recurso,
-        archivo_adjunto_url, // Será null si no se subió archivo
+        archivo_adjunto_url,
         materia_id_relacionada: materia_id_relacionada ? parseInt(materia_id_relacionada) : null,
-        es_publico: true, // Por defecto los recursos son públicos, puedes cambiarlo
-        // fecha_publicacion se establece por defecto en la BD
+        es_publico: true,
     };
 
     Recurso.create(nuevoRecurso, (error, resultado) => {
@@ -51,10 +45,9 @@ exports.crearRecurso = async (req, res) => {
             console.error("Error al crear recurso:", error);
             return res.status(500).json({ mensaje: 'Error interno al crear el recurso.', detalle: error.message });
         }
-        // Devolvemos el recurso completo, incluyendo el ID y la ruta del archivo si existe
         Recurso.findById(resultado.insertId, (err, recursoCreado) => {
-            if(err || !recursoCreado || recursoCreado.length === 0) {
-                 return res.status(201).json({ mensaje: 'Recurso creado exitosamente (detalle no recuperado).', id: resultado.insertId });
+            if (err || !recursoCreado || recursoCreado.length === 0) {
+                return res.status(201).json({ mensaje: 'Recurso creado exitosamente (detalle no recuperado).', id: resultado.insertId });
             }
             res.status(201).json(recursoCreado[0]);
         });
@@ -62,7 +55,6 @@ exports.crearRecurso = async (req, res) => {
 };
 
 exports.listarRecursosPublicos = (req, res) => {
-    // Aquí podrías añadir filtros desde req.query si es necesario (ej. por materia)
     Recurso.getAllPublic((error, recursos) => {
         if (error) {
             console.error("Error al obtener recursos públicos:", error);
@@ -73,11 +65,10 @@ exports.listarRecursosPublicos = (req, res) => {
 };
 
 exports.listarMisRecursos = (req, res) => {
-    if (!req.usuario) { // Solo usuarios logueados
+    if (!req.usuario) {
         return res.status(401).json({ mensaje: 'Acceso denegado.' });
     }
-    const asesorId = req.usuario.id; // Asume que el usuario es el asesor
-                                    // O si un admin puede ver, necesitarías lógica adicional
+    const asesorId = req.usuario.id;
 
     Recurso.findByAsesorId(asesorId, (error, recursos) => {
         if (error) {
@@ -88,16 +79,12 @@ exports.listarMisRecursos = (req, res) => {
     });
 };
 
-
 exports.eliminarRecurso = (req, res) => {
-    if (!req.usuario ) { // Solo asesores pueden borrar
+    if (!req.usuario) {
         return res.status(403).json({ mensaje: 'Acceso denegado.' });
     }
     const recursoId = req.params.id;
     const usuarioIdAutor = req.usuario.id;
-
-    // Aquí también deberías borrar el archivo físico del servidor si existe en archivo_adjunto_url
-    // fs.unlink(path.join(__dirname, '../..', recurso.archivo_adjunto_url) , (err) => ...);
 
     Recurso.delete(recursoId, usuarioIdAutor, (error, resultado) => {
         if (error) {
@@ -109,3 +96,44 @@ exports.eliminarRecurso = (req, res) => {
         res.json({ mensaje: 'Recurso eliminado exitosamente.', id: recursoId });
     });
 };
+
+// ✅ Obtener un recurso por ID
+exports.obtenerRecursoPorId = (req, res) => {
+    const id = req.params.id;
+    Recurso.findById(id, (error, resultado) => {
+        if (error) {
+            return res.status(500).json({ mensaje: 'Error al obtener el recurso.', detalle: error.message });
+        }
+        if (!resultado || resultado.length === 0) {
+            return res.status(404).json({ mensaje: 'Recurso no encontrado.' });
+        }
+        res.json(resultado[0]);
+    });
+};
+
+exports.actualizarRecurso = (req, res) => {
+  const recursoId = req.params.id;
+  const usuarioId = req.usuario?.id;
+
+  const { titulo, descripcion, enlace, tipo } = req.body;
+
+  const query = `
+    UPDATE recursos 
+    SET titulo = ?, descripcion = ?, enlace_url = ?, tipo_recurso = ?
+    WHERE id = ? AND usuario_id_autor = ?
+  `;
+
+  db.query(query, [titulo, descripcion, enlace, tipo, recursoId, usuarioId], (err, result) => {
+    if (err) {
+      console.error("Error al actualizar recurso:", err);
+      return res.status(500).json({ mensaje: 'Error al actualizar recurso.' });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ mensaje: 'Recurso no encontrado o sin permisos.' });
+    }
+
+    res.json({ mensaje: 'Recurso actualizado correctamente.' });
+  });
+};
+
