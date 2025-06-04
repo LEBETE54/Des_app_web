@@ -14,6 +14,16 @@ const AsesoriasInscritas = () => {
   const [reservas, setReservas] = useState([]);
   const [error, setError] = useState('');
   const [cargando, setCargando] = useState(true);
+const handleSalirClick = async (horarioId) => {
+  try {
+    await reservaService.salirDeAsesoria(horarioId, user.id);
+    alert("Te has salido de la asesoría.");
+    window.location.reload();
+  } catch (err) {
+    console.error("Error al salir de la asesoría:", err);
+    alert("No se pudo salir de la asesoría.");
+  }
+};
 
   useEffect(() => {
     const cargarReservas = async () => {
@@ -51,12 +61,28 @@ const AsesoriasInscritas = () => {
         <p><strong>Fin:</strong> {new Date(r.fecha_hora_fin).toLocaleString()}</p>
         <p><strong>Lugar:</strong> {r.lugar || r.enlace_o_lugar || 'No especificado'}</p>
         <p><strong>Estado:</strong> {r.estado_reserva}</p>
+         {/* Botón de salir */}
+    <button
+      onClick={() => handleSalirClick(r.horario_disponibilidad_id)}
+      style={{
+        backgroundColor: '#dc3545',
+        color: 'white',
+        padding: '8px 12px',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        marginTop: '10px'
+      }}
+    >
+      Salir de la asesoría
+    </button>
   </div>
 ))}
-
     </div>
   );
 };
+
+ 
 
 const Dashboard = () => {
   const userRol = useAuthStore(state => state.user?.rol);

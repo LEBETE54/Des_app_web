@@ -7,8 +7,7 @@ export default function Hero() {
       <div className="desc">
         <h1>¡Que tu mejor amigo sea tu asesor!</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem adipisci
-          quod earum voluptates...
+          Las mejores asesorias comienzan aqui
         </p>
         <a className="action_btn Registrarse" href="/signup">Comenzar Ahora</a>
       </div>
