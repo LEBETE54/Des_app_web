@@ -25,6 +25,10 @@ const Sidebar = ({ onSelect, seccionActual }) => {
         <li className={getActiveClass('recursos')} onClick={() => onSelect("recursos")}>
           Recursos Compartidos
         </li>
+
+        <li className={getActiveClass('recordatorios')} onClick={() => onSelect("Recordatorios")}>
+          Recordatorios
+        </li>
       </ul>
     </aside>
   );

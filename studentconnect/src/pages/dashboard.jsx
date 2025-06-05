@@ -114,6 +114,8 @@ const Dashboard = () => {
         return <GestionarHorarios />;
       case 'inscritas':
         return <AsesoriasInscritas />;
+      case 'recordatorios':
+        return <Recordatorios />; 
       default:
         return userRol === 'asesor' ? <GestionarHorarios /> : <BuscarAsesorias />;
     }
